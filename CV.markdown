@@ -4,4 +4,4 @@ title: Curriculum Vitae
 permalink: /cv/
 ---
 
-<embed src="/assets/pdf/kwang_cv.pdf" width="740px" height="2100px" />
+<embed src="https://github.com/jeffskwang/jeffskwang.github.io/blob/main/assets/pdf/kwang_CV.pdf" width="740px" height="2100px" />
