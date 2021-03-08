@@ -72,7 +72,7 @@ function erode_up(event) {
 
 //load DEM
 $.ajax({
-    url: "https://raw.githubusercontent.com/jeffskwang/jeffskwang.github.io/main/elevation_000100.csv",
+    url: "https://raw.githubusercontent.com/jeffskwang/jeffskwang.github.io/main/_data/elevation_000100.csv",
     async: false,
     success: function (csvd) {
         data = $.csv.toArrays(csvd);
