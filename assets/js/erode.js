@@ -1,7 +1,11 @@
 var canvas = document.getElementById("myCanvas");
 var ctx = canvas.getContext("2d");	
 var dt = 1
-var D = 0.001
+var K_SPL = 1.0
+var m_SPL = 0.5
+var n_SPL = 1.0
+var dx = 100.
+var D = 0.01
 var pixelindex = 0;
 var max_elevation = 0;
 var max_area = 0;
@@ -63,6 +67,7 @@ $.ajax({
 var rain = [];
 var areaold = [];
 var areanew = [];
+var slope = 0.0
 for(var i=0; i<M; i++) {
     rain[i] = [];
     areaold[i] = [];
@@ -77,6 +82,29 @@ for(var i=0; i<M; i++) {
 
 var x_neighbor = [-1,0,1,-1,1,-1,0,1]
 var y_neighbor = [1,1,1,0,0,-1,-1,-1]
+
+
+
+function diffusion(){
+	//copy and initialize old data
+	var data_old = JSON.parse(JSON.stringify(data));
+	for(var i=1; i<M-1; i++) {
+		for(var j=1; j< N-1; j++) {
+			Ncell = i + 1;
+			Wcell = j - 1;
+			Ecell = j + 1;
+			Scell = i - 1;
+			
+			Neta = parseFloat(data_old[Ncell][j])
+			Seta = parseFloat(data_old[Scell][j])
+			Weta = parseFloat(data_old[i][Wcell])
+			Eeta = parseFloat(data_old[i][Ecell])
+			eta = parseFloat(data_old[i][j])
+			
+			data[i][j] = eta + D * ((Neta - 2.0 * eta + Seta)+(Weta - 2.0 * eta + Eeta));
+		}
+	}
+}
 
 //main function
 function draw_data(){
@@ -123,7 +151,39 @@ function draw_data(){
 			}
 		}
 	}
-		
+	
+	for(var i=0; i<M; i++) {
+		for(var j=0; j< N; j++) {
+			if (areanew[i][j]>0){
+				minz = 100000.;
+				minx = -1;
+				miny = -1;
+				for (var k=0; k<8; k++){
+					i_neighbor = i + x_neighbor[k];
+					j_neighbor = j + y_neighbor[k];
+					eta_neighbor = 0.0
+					if (i_neighbor == - 1){eta_neighbor = 9999.}
+					if (i_neighbor == M){eta_neighbor = 9999.}
+					if (j_neighbor == - 1){eta_neighbor = 9999.}
+					if (j_neighbor == N){eta_neighbor = 9999.}
+					if (eta_neighbor != 9999.){
+						eta_neighbor = data[i_neighbor][j_neighbor];
+						//if (i==71 && j ==23){document.write("i=",i,",j=",j,",k=",k,",eta=",eta_neighbor,",minz=",minz,"<br>")}
+						if (eta_neighbor<minz){
+							//if (i==71 && j ==23){document.write("MEOW!","<br>")}
+							minz = eta_neighbor;
+							minx = i_neighbor;
+							miny = j_neighbor;
+						}
+					}
+				}
+				slope = (data[i][j] - data[minx][miny]) / dx
+				if (slope > 0.0){
+				data[i][j] -= K_SPL * Math.pow(areanew[i][j],m_SPL) * Math.pow(slope,n_SPL);
+				}
+			}
+		}
+	}
 	max_elevation = 0.0;
 	max_area = 0.0
 	//find max value, which i used to normalize the data
