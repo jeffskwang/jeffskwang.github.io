@@ -26,7 +26,7 @@ var click = 0;
 //steepest descent
 var minx = -1
 var miny = -1
-var minz = 1000000.
+var maxz = -100.
 
 //rain cloud radius
 var rad = 10
@@ -77,6 +77,7 @@ for(var i=0; i<M; i++) {
 
 var x_neighbor = [-1,0,1,-1,1,-1,0,1]
 var y_neighbor = [1,1,1,0,0,-1,-1,-1]
+var dx_neighbor = [Math.pow(2.0,0.5),1,Math.pow(2.0,0.5),1,1,Math.pow(2.0,0.5),1,Math.pow(2.0,0.5)]
 
 //main function
 function draw_data(){
@@ -96,7 +97,7 @@ function draw_data(){
 			areanew[i][j] += rain[i][j]
 			rain[i][j] = 0.0;
 			if (areaold[i][j]>0){
-				minz = 100000.;
+				maxz = -100.;
 				minx = -1;
 				miny = -1;
 				for (var k=0; k<8; k++){
@@ -108,11 +109,9 @@ function draw_data(){
 					if (j_neighbor == - 1){eta_neighbor = 9999.}
 					if (j_neighbor == N){eta_neighbor = 9999.}
 					if (eta_neighbor != 9999.){
-						eta_neighbor = data[i_neighbor][j_neighbor];
-						//if (i==71 && j ==23){document.write("i=",i,",j=",j,",k=",k,",eta=",eta_neighbor,",minz=",minz,"<br>")}
-						if (eta_neighbor<minz){
-							//if (i==71 && j ==23){document.write("MEOW!","<br>")}
-							minz = eta_neighbor;
+						eta_neighbor = (data[i][j] - data[i_neighbor][j_neighbor]) / dx_neighbor[k];
+						if (eta_neighbor>maxz){
+							maxz = eta_neighbor;
 							minx = i_neighbor;
 							miny = j_neighbor;
 						}
