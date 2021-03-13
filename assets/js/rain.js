@@ -5,6 +5,8 @@ var D = 0.001
 var pixelindex = 0;
 var max_elevation = 0;
 var max_area = 0;
+var alpha = 1.0
+var gray = 1.0
 var M = 100; //data dimensions
 var N = 100;
 var scale = canvas.width/M;
@@ -141,10 +143,12 @@ function draw_data(){
 					pixelindex = (i * scale + j * scale * canvas.width + m + n * canvas.width) * 4;  
 					
 					if (areanew[i][N-j-1]>0.0){
-					imagedata.data[pixelindex] = 150 * (1. - areanew[i][N-j-1]/max_area); //Red
-					imagedata.data[pixelindex+1] = 150 * (1. - areanew[i][N-j-1]/max_area); //Green
-					imagedata.data[pixelindex+2] = 255; //Blue
-					imagedata.data[pixelindex+3] = 255; //Alpha				
+					alpha = 0.5+1.0*(areanew[i][N-j-1]/max_area)
+					gray = data[i][N-j-1]/max_elevation
+					imagedata.data[pixelindex] = 255*((1.-alpha)*1.0*gray+alpha*68./255.); //Red
+					imagedata.data[pixelindex+1] = 255*((1.-alpha)*1.0*gray+alpha*176./255.); //Green
+					imagedata.data[pixelindex+2] = 255*((1.-alpha)*1.0*gray+alpha*255./255.); //Blue
+					imagedata.data[pixelindex+3] = 255*((1.-alpha)*1.0 + alpha); //Alpha			
 					}
 					else{
 					imagedata.data[pixelindex] = data[i][N-j-1]/max_elevation*255; //Red
