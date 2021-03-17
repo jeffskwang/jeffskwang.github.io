@@ -1,16 +1,13 @@
 var canvas = document.getElementById("myCanvas");
 var ctx = canvas.getContext("2d");	
 var dt = 1
-var K_SPL = 1.0
-var m_SPL = 0.5
-var n_SPL = 1.0
 var dx = 100.
 var D = 0.01
 var pixelindex = 0;
 var max_elevation = 0;
 var max_area = 0;
-var M = 25; //data dimensions
-var N = 25;
+var M = 40; //data dimensions
+var N = 40;
 var scale = canvas.width/M;
 var imagedata = ctx.createImageData(canvas.width, canvas.height);
 
@@ -33,7 +30,14 @@ var miny = -1
 var minz = 1000000.
 
 //rain cloud radius
-var rad = 10
+var rad = 5
+
+//LEM parameters
+var U = 0.001 //m/yr
+var dt_lem = 500. // yr
+var K_SPL = 0.00001 // yr^-1
+var m_SPL = 0.5
+var n_SPL = 1.0
 
 //this function determines where the mouse is on the canvas
 function rain_loc(event){
@@ -77,28 +81,6 @@ var x_neighbor = [-1,0,1,-1,1,-1,0,1]
 var y_neighbor = [1,1,1,0,0,-1,-1,-1]
 
 
-
-function diffusion(){
-	//copy and initialize old data
-	var data_old = JSON.parse(JSON.stringify(data));
-	for(var i=1; i<M-1; i++) {
-		for(var j=1; j< N-1; j++) {
-			Ncell = i + 1;
-			Wcell = j - 1;
-			Ecell = j + 1;
-			Scell = i - 1;
-			
-			Neta = parseFloat(data_old[Ncell][j])
-			Seta = parseFloat(data_old[Scell][j])
-			Weta = parseFloat(data_old[i][Wcell])
-			Eeta = parseFloat(data_old[i][Ecell])
-			eta = parseFloat(data_old[i][j])
-			
-			data[i][j] = eta + D * ((Neta - 2.0 * eta + Seta)+(Weta - 2.0 * eta + Eeta));
-		}
-	}
-}
-
 //main function
 function draw_data(){
 	//this loop erodes a river into the landscape depending on where the mouse is
@@ -106,7 +88,7 @@ function draw_data(){
 		for(var i=0; i<M; i++) {
 			for(var j=0; j< N; j++) {
 				if (Math.pow(x_click - i,2.0) + Math.pow(y_click - j,2.0) < Math.pow(rad,2.0)){
-					rain[i][j]=10.0
+					rain[i][j]= 5.0
 				}
 			}
 		}
@@ -115,7 +97,7 @@ function draw_data(){
 	for(var i=0; i<M; i++) {
 		for(var j=0; j< N; j++) {
 			slope[i][j] = 0.0;
-			areanew[i][j] += rain[i][j] + 1.0;
+			areanew[i][j] += rain[i][j]+1.0;
 			rain[i][j] = 0.0;
 			minz = 100000.;
 			minx = -1;
@@ -150,9 +132,27 @@ function draw_data(){
 	
 	for(var i=0; i<M; i++) {
 		for(var j=1; j< N; j++) {
-			data[i][j] -= data_old[i][j] + 0.001 - K_SPL * Math.pow(areanew[i][j],m_SPL) * Math.pow(slope[i][j],n_SPL);			
+			data[i][j] = data_old[i][j] + dt_lem*(U - K_SPL * Math.pow(areanew[i][j]*dx*dx,m_SPL) * Math.pow(slope[i][j],n_SPL));	
+			
+			Ncell = i + 1;
+			if (Ncell>=M){Ncell=M-1}
+			Wcell = j - 1;
+			if (Wcell<0){Wcell=0}
+			Ecell = j + 1;
+			if (Ecell>=N){Ecell=N-1}
+			Scell = i - 1;
+			if (Scell<0){Scell=0}
+			
+			Neta = data[Ncell][j]
+			Seta = data[Scell][j]
+			Weta = data[i][Wcell]
+			Eeta = data[i][Ecell]
+			eta = data[i][j]
+			
+			data[i][j] += D * ((Neta - 2.0 * eta + Seta)+(Weta - 2.0 * eta + Eeta));		
 		}
 	}
+	
 	max_elevation = 0.0;
 	max_area = 0.0
 	//find max value, which i used to normalize the data
@@ -170,7 +170,7 @@ function draw_data(){
 				for (var n=0; n <scale; n++){
 					pixelindex = (i * scale + j * scale * canvas.width + m + n * canvas.width) * 4;  
 					
-					if (areanew[i][N-j-1]>500.0){
+					if (areanew[i][N-j-1]>(M*N*.1)){
 					imagedata.data[pixelindex] = 150 * (1. - areanew[i][N-j-1]/max_area); //Red
 					imagedata.data[pixelindex+1] = 150 * (1. - areanew[i][N-j-1]/max_area); //Green
 					imagedata.data[pixelindex+2] = 255; //Blue
