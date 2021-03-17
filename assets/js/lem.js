@@ -57,6 +57,7 @@ function draw_off(event) {
 //this function triggers when the mouse leaves canvas
 function start_sim(event) {	
 	start = 1
+	click = 0
 }
 
 //this function triggers when the mouse enters canvas
