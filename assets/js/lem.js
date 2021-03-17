@@ -36,20 +36,32 @@ var K_SPL = 0.00001 // yr^-1
 var m_SPL = 0.5
 var n_SPL = 1.0
 
-var D_switch = 0
+var click = 0
+var start = 0
 
 
+function mouse_loc(event){
+	x_click = Math.trunc(event.offsetX/scale);
+	y_click = N - 1 - Math.trunc(event.offsetY/scale);
+}
 
 //this function triggers when the mouse button is pressed
-function mouse_down(event) {
-	if (D_switch == 0){D *= 10}
-	if (D_switch == 1){D /= 10}
-	
-	if (D == 1000){D_switch = 1;
-	D = 10}
-	
-	if (D == 0.001){D_switch = 0;
-	D = 0.1}
+function draw_on(event){
+	click = 1
+}
+//this function triggers when the mouse button is lifted
+function draw_off(event) {	
+	click = 0
+}
+
+//this function triggers when the mouse leaves canvas
+function start_sim(event) {	
+	start = 1
+}
+
+//this function triggers when the mouse enters canvas
+function start_draw(event) {	
+	start = 0
 }
 
 
@@ -70,7 +82,8 @@ for(var i=0; i<M; i++) {
 		areaold[i][j] = 0.0;
 		areanew[i][j] = 0.0;
 		slope[i][j] = 0.0;
-		data[i][j] = Math.random();//convert string to numbers
+		if (j == 0){data[i][j] = 0.0}
+		else {data[i][j] = Math.random()*0.01 + 10.0;}
     }
 }
 
@@ -81,64 +94,85 @@ var y_neighbor = [1,1,1,0,0,-1,-1,-1]
 
 //main function
 function draw_data(){
-	//this loop runs the diffusion equation
-	for(var i=0; i<M; i++) {
-		for(var j=0; j< N; j++) {
+	if (start == 0){//erase everything
+		for(var i=0; i<M; i++) {
+			for(var j=0; j< N; j++) {
+			rain[i][j]=0.0;
+			areaold[i][j] = 0.0;
+			areanew[i][j] = 0.0;
 			slope[i][j] = 0.0;
-			areanew[i][j] += rain[i][j]+1.0;
-			rain[i][j] = 0.0;
-			minz = 100000.;
-			minx = -1;
-			miny = -1;
-			for (var k=0; k<8; k++){
-				i_neighbor = i + x_neighbor[k];
-				j_neighbor = j + y_neighbor[k];
-				eta_neighbor = 0.0
-				if (i_neighbor == - 1){eta_neighbor = 9999.}
-				if (i_neighbor == M){eta_neighbor = 9999.}
-				if (j_neighbor == - 1){eta_neighbor = 9999.}
-				if (j_neighbor == N){eta_neighbor = 9999.}
-				if (eta_neighbor != 9999.){
-					eta_neighbor = data[i_neighbor][j_neighbor];
-					//if (i==71 && j ==23){document.write("i=",i,",j=",j,",k=",k,",eta=",eta_neighbor,",minz=",minz,"<br>")}
-					if (eta_neighbor<minz){
-						//if (i==71 && j ==23){document.write("MEOW!","<br>")}
-						minz = eta_neighbor;
-						minx = i_neighbor;
-						miny = j_neighbor;
-					}
-				}
+			if (j == 0){data[i][j] = 0.0}
+			else {data[i][j] = Math.random()*0.01 + 10.0;}
 			}
-			//document.write(i,",",j,";!",minx,",",miny,"!;?",minz,"?","<br>")
-			if (minx!=-1 && miny!=-1) {
-				slope[i][j] = (data[i][j] - data[minx][miny]) / dx;
-				areanew[minx][miny]+=areaold[i][j];
-			}
-			
+		}
+		start = 2 //standby mode
+	}
+	if (start == 2){
+		if (click == 1){
+			data[x_click][y_click]=0.0
 		}
 	}
 	
-	for(var i=0; i<M; i++) {
-		for(var j=1; j< N; j++) {
-			if (areanew[i][j] > M*N){areanew[i][j]= M*N}
-			data[i][j] = data_old[i][j] + dt_lem*(U - K_SPL * Math.pow(areanew[i][j]*dx*dx,m_SPL) * Math.pow(slope[i][j],n_SPL));	
-			
-			Ncell = i + 1;
-			if (Ncell>=M){Ncell=M-1}
-			Wcell = j - 1;
-			if (Wcell<0){Wcell=0}
-			Ecell = j + 1;
-			if (Ecell>=N){Ecell=N-1}
-			Scell = i - 1;
-			if (Scell<0){Scell=0}
-			
-			Neta = data[Ncell][j]
-			Seta = data[Scell][j]
-			Weta = data[i][Wcell]
-			Eeta = data[i][Ecell]
-			eta = data[i][j]
-			
-			data[i][j] += D * ((Neta - 2.0 * eta + Seta)/dx/dx+(Weta - 2.0 * eta + Eeta)/dx/dx);		
+	if (start == 1){
+		//this loop runs the diffusion equation
+		for(var i=0; i<M; i++) {
+			for(var j=0; j< N; j++) {
+				slope[i][j] = 0.0;
+				areanew[i][j] += rain[i][j]+1.0;
+				rain[i][j] = 0.0;
+				minz = 100000.;
+				minx = -1;
+				miny = -1;
+				for (var k=0; k<8; k++){
+					i_neighbor = i + x_neighbor[k];
+					j_neighbor = j + y_neighbor[k];
+					eta_neighbor = 0.0
+					if (i_neighbor == - 1){eta_neighbor = 9999.}
+					if (i_neighbor == M){eta_neighbor = 9999.}
+					if (j_neighbor == - 1){eta_neighbor = 9999.}
+					if (j_neighbor == N){eta_neighbor = 9999.}
+					if (eta_neighbor != 9999.){
+						eta_neighbor = data[i_neighbor][j_neighbor];
+						//if (i==71 && j ==23){document.write("i=",i,",j=",j,",k=",k,",eta=",eta_neighbor,",minz=",minz,"<br>")}
+						if (eta_neighbor<minz){
+							//if (i==71 && j ==23){document.write("MEOW!","<br>")}
+							minz = eta_neighbor;
+							minx = i_neighbor;
+							miny = j_neighbor;
+						}
+					}
+				}
+				//document.write(i,",",j,";!",minx,",",miny,"!;?",minz,"?","<br>")
+				if (minx!=-1 && miny!=-1) {
+					slope[i][j] = (data[i][j] - data[minx][miny]) / dx;
+					areanew[minx][miny]+=areaold[i][j];
+				}
+				
+			}
+		}
+		
+		for(var i=0; i<M; i++) {
+			for(var j=1; j< N; j++) {
+				if (areanew[i][j] > M*N){areanew[i][j]= M*N}
+				data[i][j] = data_old[i][j] + dt_lem*(U - K_SPL * Math.pow(areanew[i][j]*dx*dx,m_SPL) * Math.pow(slope[i][j],n_SPL));	
+				
+				Ncell = i + 1;
+				if (Ncell>=M){Ncell=M-1}
+				Wcell = j - 1;
+				if (Wcell<0){Wcell=0}
+				Ecell = j + 1;
+				if (Ecell>=N){Ecell=N-1}
+				Scell = i - 1;
+				if (Scell<0){Scell=0}
+				
+				Neta = data[Ncell][j]
+				Seta = data[Scell][j]
+				Weta = data[i][Wcell]
+				Eeta = data[i][Ecell]
+				eta = data[i][j]
+				
+				data[i][j] += D * ((Neta - 2.0 * eta + Seta)/dx/dx+(Weta - 2.0 * eta + Eeta)/dx/dx);		
+			}
 		}
 	}
 	
@@ -181,8 +215,7 @@ function draw_data(){
 			areanew[i][j] = 0.0;
 		}
 	}
-	
-	
+			
 	//this draws the array data as an pixel image
 	ctx.putImageData(imagedata, 0, 0);
 }	
