@@ -24,6 +24,7 @@ var y_click = 0;
 
 //determines is the mouse button is pressed
 var click = 0;
+var alpha_cloud = 0.2
 
 //steepest descent
 var minx = -1
@@ -140,21 +141,28 @@ function draw_data(){
 		for(var j=0; j< N; j++) {
 			for (var m=0; m < scale; m++){ 
 				for (var n=0; n <scale; n++){
-					pixelindex = (i * scale + j * scale * canvas.width + m + n * canvas.width) * 4;  
-					
+					pixelindex = (i * scale + j * scale * canvas.width + m + n * canvas.width) * 4;  					
 					if (areanew[i][N-j-1]>0.0){
-					alpha = 0.5+1.0*(areanew[i][N-j-1]/max_area)
-					gray = data[i][N-j-1]/max_elevation
-					imagedata.data[pixelindex] = 255*((1.-alpha)*1.0*gray+alpha*68./255.); //Red
-					imagedata.data[pixelindex+1] = 255*((1.-alpha)*1.0*gray+alpha*176./255.); //Green
-					imagedata.data[pixelindex+2] = 255*((1.-alpha)*1.0*gray+alpha*255./255.); //Blue
-					imagedata.data[pixelindex+3] = 255*((1.-alpha)*1.0 + alpha); //Alpha			
+						alpha = 0.5+1.0*(areanew[i][N-j-1]/max_area)
+						gray = data[i][N-j-1]/max_elevation
+						imagedata.data[pixelindex] = 255*((1.-alpha)*1.0*gray+alpha*68./255.); //Red
+						imagedata.data[pixelindex+1] = 255*((1.-alpha)*1.0*gray+alpha*176./255.); //Green
+						imagedata.data[pixelindex+2] = 255*((1.-alpha)*1.0*gray+alpha*255./255.); //Blue
+						imagedata.data[pixelindex+3] = 255*(((1.-alpha)*1.0 + alpha)+alpha_cloud); //Alpha			
 					}
 					else{
-					imagedata.data[pixelindex] = data[i][N-j-1]/max_elevation*255; //Red
-					imagedata.data[pixelindex+1] = data[i][N-j-1]/max_elevation*255; //Green
-					imagedata.data[pixelindex+2] = data[i][N-j-1]/max_elevation*255; //Blue
-					imagedata.data[pixelindex+3] = 255; //Alpha
+						if (Math.pow(x_click - i,2.0) + Math.pow(y_click - (N-j-1),2.0) < Math.pow(rad,2.0)){
+						imagedata.data[pixelindex] = (1.-alpha_cloud)*data[i][N-j-1]/max_elevation*255; //Red
+						imagedata.data[pixelindex+1] = (1.-alpha_cloud)*data[i][N-j-1]/max_elevation*255; //Green
+						imagedata.data[pixelindex+2] = (1.-alpha_cloud)*data[i][N-j-1]/max_elevation*255; //Blue
+						imagedata.data[pixelindex+3] = 255*((1.-alpha_cloud)*1.0+alpha_cloud); //Alpha						
+						}
+						else{
+						imagedata.data[pixelindex] = data[i][N-j-1]/max_elevation*255; //Red
+						imagedata.data[pixelindex+1] = data[i][N-j-1]/max_elevation*255; //Green
+						imagedata.data[pixelindex+2] = data[i][N-j-1]/max_elevation*255; //Blue
+						imagedata.data[pixelindex+3] = 255; //Alpha
+						}
 					}
 				}
 			}

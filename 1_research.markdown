@@ -12,9 +12,17 @@ permalink: /research/
 <h1>!!!UNDER CONSTRUCTION!!!</h1>
 <h2>Landscape Evolution Modeling</h2>
 
-<p><canvas id="myCanvas" width = "300" height ="300" onmousedown="draw_on(event)" onmouseup = "draw_off(event)" onmousemove = "mouse_loc(event)" onmouseout = "start_sim(event)" onmouseover = "start_draw(event)" style="float: right;margin-left:15px; border:1px solid #000000;"></canvas>
+<p><canvas id="myCanvas" width = "370" height ="370" onmousedown="draw_on(event)" onmouseup = "draw_off(event)" onmousemove = "mouse_loc(event)" onmouseout = "start_sim(event)" onmouseover = "start_draw(event)" style="float: right;margin-left:15px; border:4px solid #ededed;"></canvas>
 <script src="/assets/js/lem.js" type="text/javascript"></script>
-Instructions: Hover your mouse over the box to start and hold the mouse down to draw an initial valley. Move the mouse out of the box to start the simulation!</p>
+Instructions: Hover your mouse over the box to start and hold the mouse down to draw an initial valley. Move the mouse out of the box to start the simulation!
+</p>
+
+<p>
+We wrote a paper about how initial conditions affect landscape evolution models. See my <a href="https://doi.org/10.1029/2019GL083305"><b>paper</b></a>.
+
+</p>
+
+
 
 
 <!--
