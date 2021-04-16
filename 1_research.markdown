@@ -34,8 +34,8 @@ permalink: /research/
 		
 		<figcaption><b>Fig 2.</b> Draw your own initial condition!<br />
 		<b>Instructions:</b><br />
-		(1) Hold down the mouse to draw an initial channel.<br />
-		(2) Move the mouse out of the box to start the simulation.</figcaption>
+		(1) Hold down the mouse and draw an initial channel.<br />
+		(2) Move the mouse out of the box to run the model.</figcaption>
 </figure>
 </h1>
 <p>
