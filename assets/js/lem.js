@@ -6,8 +6,8 @@ var D = 1.0
 var pixelindex = 0;
 var max_elevation = 0;
 var max_area = 0;
-var M = 74; //data dimensions
-var N = 74;
+var M = 70; //data dimensions
+var N = 70;
 var scale = canvas.width/M;
 var imagedata = ctx.createImageData(canvas.width, canvas.height);
 

@@ -9,27 +9,69 @@ permalink: /research/
 </style>
 </head>
 <body>
-<h1>!!!UNDER CONSTRUCTION!!!</h1>
-<h2>Landscape Evolution Modeling</h2>
+<h1><b>Landscape Evolution Modeling </b></h1>
 
-<p><canvas id="myCanvas" width = "370" height ="370" onmousedown="draw_on(event)" onmouseup = "draw_off(event)" onmousemove = "mouse_loc(event)" onmouseout = "start_sim(event)" onmouseover = "start_draw(event)" style="float: right;margin-left:15px; border:4px solid #ededed;"></canvas>
+<p>I study how landscapes respond to climate and tectonics using numerical models, named landscape evolution models. In these models, rock is introduced into the landscape by rock uplift and eroded away by river erosion. These mechanisms interact to create a mountainous landform that is dissected by a network of rivers. I use these models to understand how river networks develop and reorganize.</p>
+
+<br />
+
+<br />
+<br />
+<br />
+
+<h1><b>Initial Conditions</b>
+<canvas id="myCanvas" width = "350" height ="350" onmousedown="draw_on(event)" onmouseup = "draw_off(event)" onmousemove = "mouse_loc(event)" onmouseout = "start_sim(event)" onmouseover = "start_draw(event)" style="float: right;margin-left:15px; border:4px solid #ededed;"></canvas>
 <script src="/assets/js/lem.js" type="text/javascript"></script>
-Instructions: Hover your mouse over the box to start and hold the mouse down to draw an initial valley. Move the mouse out of the box to start the simulation!
-</p>
+</h1>
 
 <p>
-We wrote a paper about how initial conditions affect landscape evolution models. See my <a href="https://doi.org/10.1029/2019GL083305"><b>paper</b></a>.
+I am particularly interested in how the initial topography affects landscape evolution modeling. Typically for initial topographies, modelers start with a flat landscape and then add random, small topographic perturbations.
+
+<br />
+<br />
+However, when you deliberately add structure (e.g., a small channel) to the initial topography, its signal is amplified and permanently retained in the landscape as a valley. Try this in the panel to the right! 
+<br />
+<br /> 
+<b>Should this happen in real landscapes?</b>
+</p>
+
+
+<p>
 
 </p>
 
 
 
 
-<!--
-<p><img src="/assets/research/foutput.gif" alt="Drainage Networks" style="width:400px;height:400px;margin-left:15px;float: right">
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet, nulla et dictum interdum, nisi lorem egestas odio, vitae scelerisque enim ligula venenatis dolor. Maecenas nisl est, ultrices nec congue eget, auctor vitae massa. Fusce luctus vestibulum augue ut aliquet. Mauris ante ligula, facilisis sed ornare eu, lobortis in odio. Praesent convallis urna a lacus interdum ut hendrerit risus congue. Nunc sagittis dictum nisi, sed ullamcorper ipsum dignissim ac. In at libero sed nunc venenatis imperdiet sed ornare turpis. Donec vitae dui eget tellus gravida venenatis. Integer fringilla congue eros non fermentum. Sed dapibus pulvinar nibh tempor porta. Cras ac leo purus. Mauris quis diam velit.</p>
--->
+<br />
+<br />
 
+
+<h1><img src="/assets/research/xlm_schematic.png" alt="Grid" style="width:350px;height:350px;margin-right:15px;float:left"><b>Experimental Landscapes</b></h1>
+<p>
+Geomorphologist
+</p>
+<p>
+See my paper: (<a href="https://doi.org/10.1029/2019GL083305"><b>Kwang and Parker, 2019</b></a>).
+</p>
+
+<br /> 
+<br /> 
+<br /> 
+<br /> 
+<br /> 
+<br /> 
+<br /> 
+<br /> 
+<br /> 
+<br /> 
+<br /> 
+<br /> 
+<br /> 
+<video width="500" height="500" controls>
+  <source src="/assets/research/dem_animated.mp4" type="video/mp4">
+Your browser does not support the video tag.
+</video> 
 </body>
 </html>
 
