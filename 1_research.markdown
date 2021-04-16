@@ -11,43 +11,59 @@ permalink: /research/
 <body>
 <h1><b>Landscape Evolution Modeling </b></h1>
 
-<p>I study how landscapes respond to climate and tectonics using numerical models, named landscape evolution models. In these models, rock is introduced into the landscape by rock uplift and eroded away by river erosion. These mechanisms interact to create a mountainous landform that is dissected by a network of rivers. I use these models to understand how river networks develop and reorganize.</p>
+<p>I study how landscapes respond to climate and tectonics using numerical models, named landscape evolution models. In these models, rock is introduced into the landscape by rock uplift and eroded away by river erosion. These mechanisms interact to create a mountainous landform that is dissected by a network of rivers. I use these models to understand how river networks develop and reorganize.
+</p>
 
 <br />
+<figure>
+	<video width="740" height="287" controls>
+	  <source src="/assets/research/lem.mp4" type="video/mp4">
+	Your browser does not support the video tag.
+	</video> 
+	<figcaption><b>Fig 1.</b> Movie of a landscape evolution simulation.</figcaption>
+</figure>
 
-<br />
-<br />
 <br />
 
 <h1><b>Initial Conditions</b>
-<canvas id="myCanvas" width = "350" height ="350" onmousedown="draw_on(event)" onmouseup = "draw_off(event)" onmousemove = "mouse_loc(event)" onmouseout = "start_sim(event)" onmouseover = "start_draw(event)" style="float: right;margin-left:15px; border:4px solid #ededed;"></canvas>
-<script src="/assets/js/lem.js" type="text/javascript"></script>
+<figure style="float: right;margin-left:15px; border:4px solid #ededed;">
+		<canvas id="myCanvas" width = "350" height ="350" onmousedown="draw_on(event)" onmouseup = "draw_off(event)" onmousemove = "mouse_loc(event)" onmouseout = "start_sim(event)" onmouseover = "start_draw(event)">
+		</canvas>
+		<script src="/assets/js/lem.js" type="text/javascript">
+		</script>
+		
+		<figcaption><b>Fig 2.</b> Draw your own initial condition!<br />
+		<b>Instructions:</b><br />
+		(1) Hold down the mouse to draw an initial channel.<br />
+		(2) Move the mouse out of the box to start the simulation.</figcaption>
+</figure>
 </h1>
-
 <p>
 I am particularly interested in how the initial topography affects landscape evolution modeling. Typically for initial topographies, modelers start with a flat landscape and then add random, small topographic perturbations.
 
 <br />
 <br />
-However, when you deliberately add structure (e.g., a small channel) to the initial topography, its signal is amplified and permanently retained in the landscape as a valley. Try this in the panel to the right! 
+However, when you deliberately add structure (e.g., a small channel) to the initial topography, its signal is amplified and permanently retained in the landscape as a valley. Draw your own initial condition in the panel on the right!
 <br />
 <br /> 
-<b>Should this happen in real landscapes?</b>
+<b>What should happen in real landscapes?</b>
 </p>
 
-
-<p>
-
-</p>
-
-
-
-
+<br /> 
+<br /> 
+<br /> 
+<br /> 
 <br />
 <br />
+<br /> 
 
 
-<h1><img src="/assets/research/xlm_schematic.png" alt="Grid" style="width:350px;height:350px;margin-right:15px;float:left"><b>Experimental Landscapes</b></h1>
+<h1><b>Experimental Landscapes</b>
+<figure alt="Grid" style="width:350px;height:350px;margin-right:15px;float:left">
+<img src="/assets/research/xlm_schematic.png">
+<figcaption><b>Fig 3.</b> </figcaption>
+</figure>
+</h1>
 <p>
 Geomorphologist
 </p>
