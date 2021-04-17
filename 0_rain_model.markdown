@@ -11,7 +11,7 @@ permalink: /rain/
 <script src="/assets/js/rain.js" type="text/javascript"></script>
 </b>
 </h1>
-<p>The gray-scale image to the right depicts a 
+<p style="text-align:justify">The gray-scale image to the right depicts a 
 <a href="https://www.usgs.gov/faqs/what-are-digital-elevation-models-dems?qt-news_science_products=0#qt-news_science_products">
 <b>digital elevation model (DEM)</b></a>. Each pixel
 in the DEM represents the height of the landscape, where dark
@@ -23,15 +23,21 @@ areas are low and light areas are high.</p>
 <br />
 <br />
 <br />
-<br />
 
 <h1><img src="/assets/rain/foutput.gif" alt="Grid" style="width:250px;height:250px;margin-right:15px;float:left"><b>How does it work?</b>
 </h1>
-<p>Here, we zoom in on 9 of the pixels of the DEM. When rain lands on a pixel, we tell the
+<p style="text-align:justify">Here, we zoom in on 9 of the pixels of the DEM. When rain lands on a pixel, we tell the
 water to move in the direction of <a href="https://www.sciencedirect.com/science/article/abs/pii/S0734189X84800110?via%3Dihub">
 <b>steepest descent</b></a>. Think about placing a ball on a hill. Which way does the ball tend to roll?
 </p>
 
 
-
+<br />
+<br />
+<br />
+<br />
+<br />
+<h1><b>More interactive models to come...</b></h1>
+<p style="text-align:justify"> I'm still learning Javascript, but I hope to make more web-based interactive models in the future. If you want to make your own models, you can find my source code <a href="https://github.com/jeffskwang/jeffskwang.github.io/tree/main"><b>here</b></a>.
+</p>
 
