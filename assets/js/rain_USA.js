@@ -7,8 +7,8 @@ var max_elevation = 0;
 var max_area = 0;
 var alpha = 1.0
 var gray = 1.0
-var M = 100; //data dimensions
-var N = 100;
+var M = 314; //data dimensions
+var N = 498;
 var scale = canvas.width/M;
 var imagedata = ctx.createImageData(canvas.width, canvas.height);
 
@@ -51,7 +51,7 @@ function mouse_up(event) {
 
 //load DEM
 $.ajax({
-    url: "https://raw.githubusercontent.com/jeffskwang/jeffskwang.github.io/main/_data/elevation_000100.csv",
+    url: "https://raw.githubusercontent.com/jeffskwang/jeffskwang.github.io/main/_data/dem_10.csv",
     async: false,
     success: function (csvd) {
         data = $.csv.toArrays(csvd);

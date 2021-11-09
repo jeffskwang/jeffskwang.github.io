@@ -8,3 +8,6 @@ permalink: /links/
 
 <h1><a href="https://urgeoscience.org/"><b>https://urgeoscience.org/</b></a></h1>
 <p>This site has tons of resources about understanding how to become anti-racist. If you didn't get a chance to participate, there are great examples of anti-racist policies and strategies that were developed during URGE.</p>
+
+<h1><a href="http://hydrolab.illinois.edu/people/parkerg/morphodynamics_e-book.htm"><b>http://hydrolab.illinois.edu/people/parkerg/morphodynamics_e-book.htm</b></a></h1>
+<p>Just go here if you want to learn about modeling rivers.</p>
