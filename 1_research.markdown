@@ -110,7 +110,7 @@ permalink: /research/
 	<br />
 	<br /> 
 	
-	<figure alt="Grid" style="width:420px;height:3000px;float: right;margin-left:15px;float:right;padding-left:20px;">
+	<figure alt="Grid" style="width:420px;height:250px;float: right;margin-left:15px;float:right;padding-left:20px;padding-bottom:20px">
 		<img src="/assets/research/correlation.png">
 		<figcaption style="text-align:justify">
 			<b>Fig. 6</b> Correlation coefficients for different values of <i>K<sub>L</sub>/K<sub>V</sub></i>. As the coefficient becomes less than 1, the landscape loses memory of its initial condition. The steepness of the slope of the lines indicates the speed at which the landscape forgets its initial condition.
