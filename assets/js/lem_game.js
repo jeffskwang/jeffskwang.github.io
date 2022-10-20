@@ -1,15 +1,32 @@
 var canvas = document.getElementById("myCanvas");
-var ctx = canvas.getContext("2d");	
-var dt = 1
-var dx = 50.
-var D = 1.0
+
+var d_slider = document.getElementById("d_Range");
+document.getElementById('d_output').innerHTML = Math.pow(10.,d_slider.value / 2.).toPrecision(2)
+
+var u_slider = document.getElementById("u_Range");
+document.getElementById('u_output').innerHTML = (u_slider.value*0.2).toPrecision(1)
+
+var k_slider = document.getElementById("k_Range");
+document.getElementById('k_output').innerHTML = (k_slider.value*0.000002).toPrecision(1)
+
+var button = document.getElementById("start_model");
+
+var ctx = canvas.getContext("2d");
+var max_canvas_width = 500	
+var dx = 25.
+var D = Math.pow(10.,d_slider.value / 2.)
 var pixelindex = 0;
 var max_elevation = 0;
 var max_area = 0;
-var M = 70; //data dimensions
-var N = 70;
-var scale = canvas.width/M;
-var imagedata = ctx.createImageData(canvas.width, canvas.height);
+var rows = document.getElementById('input_rows')
+var columns = document.getElementById('input_columns')
+
+var M = rows.value //data dimensions
+var N = columns.value;
+var scale = Math.floor(max_canvas_width/M);
+ctx.canvas.width = M * scale
+ctx.canvas.height = N * scale
+var imagedata = ctx.createImageData(ctx.canvas.width, ctx.canvas.height)
 
 //define variables for the neighbor cells in the diffusion model
 var Ncell = 0;
@@ -30,41 +47,47 @@ var miny = -1
 var minz = 1000000.
 
 //LEM parameters
-var U = 0.001 //m/yr
+var U = (u_slider.value*0.0002) //m/yr
 var dt_lem = 500. // yr
-var K_SPL = 0.00001 // yr^-1
+var K_SPL = (k_slider.value*0.000002).toPrecision(1) // yr^-1
 var m_SPL = 0.5
 var n_SPL = 1.0
 
-var click = 0
 var start = 0
 
+var time_start = new Date()
+var time_measure
+var dt_measure = 0.0
 
-function mouse_loc(event){
-	x_click = Math.trunc(event.offsetX/scale);
-	y_click = N - 1 - Math.trunc(event.offsetY/scale);
+var shakeup = 0
+var regrid = 0
+
+d_slider.onchange = function(event){
+  D = Math.pow(10.,d_slider.value / 2.);
+  document.getElementById('d_output').innerHTML = D.toPrecision(2)
+  shakeup = 1
 }
 
-//this function triggers when the mouse button is pressed
-function draw_on(event){
-	click = 1
-}
-//this function triggers when the mouse button is lifted
-function draw_off(event) {	
-	click = 0
+u_slider.onchange = function(event){
+  U = (u_slider.value*0.0002);
+  document.getElementById('u_output').innerHTML = (1000*U).toPrecision(1)
 }
 
-//this function triggers when the mouse leaves canvas
-function start_sim(event) {	
-	start = 1
-	click = 0
+k_slider.onchange = function(event){
+  K_SPL = (k_slider.value*0.000002);
+  document.getElementById('k_output').innerHTML = K_SPL.toPrecision(1)
+  shakeup = 1
+  dt_lem = 500. * 0.00001 / K_SPL 
 }
 
-//this function triggers when the mouse enters canvas
-function start_draw(event) {	
-	start = 0
-}
-
+button.onclick = function(event){start=1;
+	regrid = 1;
+	M = rows.value;
+	N = columns.value;
+	scale = Math.floor(max_canvas_width/M)
+	ctx.canvas.width = M * scale
+	ctx.canvas.height = N * scale
+	imagedata = ctx.createImageData(ctx.canvas.width, ctx.canvas.height)}
 
 //make river matrix <- this is what the user draws
 var rain = [];
@@ -83,7 +106,10 @@ for(var i=0; i<M; i++) {
 		areaold[i][j] = 0.0;
 		areanew[i][j] = 0.0;
 		slope[i][j] = 0.0;
-		if (j == 0){data[i][j] = 0.0}
+		if (i == 0){data[i][j] = 0.0}
+		else if (i == M-1){data[i][j] = 0.0}
+		else if (j == 0){data[i][j] = 0.0}
+		else if (j == N-1){data[i][j] = 0.0}
 		else {data[i][j] = Math.random()*0.01 + 10.0;}
     }
 }
@@ -95,26 +121,40 @@ var y_neighbor = [1,1,1,0,0,-1,-1,-1]
 
 //main function
 function draw_data(){
-	if (start == 0){//erase everything
+	if (regrid == 1){regrid=0;
+		rain = [];
+		areaold = [];
+		areanew = [];
+		data = [];
+		slope = [];
 		for(var i=0; i<M; i++) {
-			for(var j=0; j< N; j++) {
-			rain[i][j]=0.0;
-			areaold[i][j] = 0.0;
-			areanew[i][j] = 0.0;
-			slope[i][j] = 0.0;
-			if (j == 0){data[i][j] = 0.0}
-			else {data[i][j] = Math.random()*0.01 + 10.0;}
-			}
+		    rain[i] = [];
+		    areaold[i] = [];
+		    areanew[i] = [];
+			data[i] = [];
+			slope[i] = [];
+		    for(var j=0; j< N; j++) {
+				rain[i][j]=0.0;
+				areaold[i][j] = 0.0;
+				areanew[i][j] = 0.0;
+				slope[i][j] = 0.0;
+				if (i == 0){data[i][j] = 0.0}
+				else if (i == M-1){data[i][j] = 0.0}
+				else if (j == 0){data[i][j] = 0.0}
+				else if (j == N-1){data[i][j] = 0.0}
+				else {data[i][j] = Math.random()*0.01 + 10.0;}
+		    }
 		}
-		start = 2 //standby mode
+		data_old = JSON.parse(JSON.stringify(data));
 	}
-	if (start == 2){
-		if (click == 1){
-			data[x_click][y_click]=0.0
-		}
-	}
-	
+
 	if (start == 1){
+		time_measure = new Date() - time_start
+		dt_measure += dt_lem
+		if (time_measure>1000){time_start = new Date();
+			document.getElementById('time_per_second').innerHTML = (dt_measure/1000.).toPrecision(3);
+			dt_measure = 0.0}
+
 		//this loop runs the diffusion equation
 		for(var i=0; i<M; i++) {
 			for(var j=0; j< N; j++) {
@@ -152,8 +192,8 @@ function draw_data(){
 			}
 		}
 		
-		for(var i=0; i<M; i++) {
-			for(var j=1; j< N; j++) {
+		for(var i=1; i<M-1; i++) {
+			for(var j=1; j< N-1; j++) {
 				if (areanew[i][j] > M*N){areanew[i][j]= M*N}
 				data[i][j] = data_old[i][j] + dt_lem*(U - K_SPL * Math.pow(areanew[i][j]*dx*dx,m_SPL) * Math.pow(slope[i][j],n_SPL));	
 				
@@ -176,9 +216,17 @@ function draw_data(){
 			}
 		}
 	}
+
+	if (shakeup==1){shakeup=0;
+	  for(var i=1; i<M-1; i++) {
+			for(var j=1; j< N-1; j++) {
+				data[i][j] += Math.random()*max_elevation*0.05;
+			}
+		}
+	}
 	
 	max_elevation = 0.0;
-	max_area = M*N*0.25;
+	max_area = M*N*dx*dx;
 	//find max value, which i used to normalize the data
 	for(var i=0; i<M; i++) {
 		for(var j=0; j< N; j++) {
@@ -186,15 +234,18 @@ function draw_data(){
 			//if (areanew[i][j]>max_area){max_area=areanew[i][j]};
 		}
 	}
+	document.getElementById('max_ele').innerHTML = max_elevation.toPrecision(4)
+	document.getElementById('basin_area').innerHTML = (max_area/1000/1000).toPrecision(3)
+
 	//document.write(typeof data[5][5],"<br>")
 	//this normalizes the data and makes the range of values from 0 to 255 (8bit data)
 	for(var i=0; i<M; i++) {
 		for(var j=0; j< N; j++) {
 			for (var m=0; m < scale; m++){ 
 				for (var n=0; n <scale; n++){
-					pixelindex = (i * scale + j * scale * canvas.width + m + n * canvas.width) * 4;  
+					pixelindex = (i * scale + j * scale * ctx.canvas.width + m + n * ctx.canvas.width) * 4;  
 					
-					alpha = 0.5*(areanew[i][N-j-1]/max_area)
+					alpha = 0.0//1.0*(areanew[i][N-j-1]/max_area)
 					gray = data[i][N-j-1]/max_elevation
 					imagedata.data[pixelindex] = 255*((1.-alpha)*1.0*gray+alpha*68./255.); //Red
 					imagedata.data[pixelindex+1] = 255*((1.-alpha)*1.0*gray+alpha*176./255.); //Green
@@ -211,6 +262,15 @@ function draw_data(){
 			areaold[i][j] = areanew[i][j];
 			data_old[i][j] = data[i][j];
 			if (j==0){areaold[i][j]=0.0;
+				data_old[i][j] = 0.0;
+			}
+			if (i==0){areaold[i][j]=0.0;
+				data_old[i][j] = 0.0;
+			}
+			if (j==N-1){areaold[i][j]=0.0;
+				data_old[i][j] = 0.0;
+			}
+			if (i==M-1){areaold[i][j]=0.0;
 				data_old[i][j] = 0.0;
 			}
 			areanew[i][j] = 0.0;

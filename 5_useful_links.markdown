@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Useful Links
+title: Links
 permalink: /links/
 ---
 <h1><a href="https://connect.agu.org/epsp/links-resources"><b>https://connect.agu.org/epsp/links-resources</b></a></h1>
