@@ -21,17 +21,18 @@ permalink: /iLEM/
 <br><br>
 <h1><b>Congratulations! You're a modeler.</b></h1>
 
-Rows:
-<input type="text"
-           value="70"
-           style="width: 30px;"
-           id="input_rows">
-<br>
 Columns:
 <input type="text"
            value="70"
            style="width: 30px;"
            id="input_columns">
+<br>
+Rows:
+<input type="text"
+           value="70"
+           style="width: 30px;"
+           id="input_rows">
+
 
 <div class="slidecontainer">
   <input type="range" min="-2" max="2" value="0" class="slider" id="d_Range">

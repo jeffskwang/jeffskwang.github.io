@@ -21,8 +21,8 @@ var max_area = 0;
 var rows = document.getElementById('input_rows')
 var columns = document.getElementById('input_columns')
 
-var M = rows.value //data dimensions
-var N = columns.value;
+var M = columns.value //data dimensions
+var N = rows.value;
 var scale = Math.floor(max_canvas_width/M);
 ctx.canvas.width = M * scale
 ctx.canvas.height = N * scale
@@ -82,8 +82,8 @@ k_slider.onchange = function(event){
 
 button.onclick = function(event){start=1;
 	regrid = 1;
-	M = rows.value;
-	N = columns.value;
+	M = columns.value;
+	N = rows.value;
 	scale = Math.floor(max_canvas_width/M)
 	ctx.canvas.width = M * scale
 	ctx.canvas.height = N * scale
