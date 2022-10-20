@@ -58,8 +58,9 @@ Rows:
 	Relief = <b><span id="max_ele"></span> m</b>	<br><br>
 	<b>Instructions:</b><br />
 		(1) Press "Start Model" to start the simulation.<br />
-		(2) Adjust the <i>hillslope diffusion coefficient</i> [<b><i>D</i></b>], <i>uplift rate</i> [<b><i>U</i></b>], and <i>rock erodibility coefficient</i> [<b><i>K</i></b>].<br />
-		(3) Look at readout about model speed (years per second) and landscape relief (max elevation - min elevation).
+		(2) Change number of columns and rows to change the domain size. (Warning: Too many cells will be slow!) <br />
+		(3) Adjust the <i>hillslope diffusion coefficient</i> [<b><i>D</i></b>], <i>uplift rate</i> [<b><i>U</i></b>], and <i>rock erodibility coefficient</i> [<b><i>K</i></b>].<br />
+		(4) Look at readout about model speed (years per second) and landscape relief (max elevation - min elevation).
 	</figcaption>
 </figure>
 
