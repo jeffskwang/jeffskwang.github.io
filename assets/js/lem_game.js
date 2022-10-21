@@ -12,7 +12,7 @@ document.getElementById('k_output').innerHTML = (k_slider.value*0.000002).toPrec
 var button = document.getElementById("start_model");
 
 var ctx = canvas.getContext("2d");
-var max_canvas_width = 600	
+var max_canvas_size = 600	
 var dx = 25.
 var D = Math.pow(10.,d_slider.value / 2.)
 var pixelindex = 0;
@@ -21,9 +21,10 @@ var max_area = 0;
 var rows = document.getElementById('input_rows')
 var columns = document.getElementById('input_columns')
 
-var M = columns.value //data dimensions
-var N = rows.value;
-var scale = Math.floor(max_canvas_width/M);
+var M = Number(columns.value) //data dimensions
+var N = Number(rows.value);
+if (M >= N){var scale = Math.floor(max_canvas_size/M); document.write('meow')}
+else if (N > M) {var scale = Math.floor(max_canvas_size/N); document.write('meow mix')}
 ctx.canvas.width = M * scale
 ctx.canvas.height = N * scale
 var imagedata = ctx.createImageData(ctx.canvas.width, ctx.canvas.height)
@@ -82,9 +83,10 @@ k_slider.onchange = function(event){
 
 button.onclick = function(event){start=1;
 	regrid = 1;
-	M = columns.value;
-	N = rows.value;
-	scale = Math.floor(max_canvas_width/M)
+	M = Number(columns.value) //data dimensions
+	N = Number(rows.value);
+	if (M>=N){scale = Math.floor(max_canvas_size/M)}
+	else if (N>M) {scale = Math.floor(max_canvas_size/N)}
 	ctx.canvas.width = M * scale
 	ctx.canvas.height = N * scale
 	imagedata = ctx.createImageData(ctx.canvas.width, ctx.canvas.height)}
