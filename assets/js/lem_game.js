@@ -118,7 +118,6 @@ var data_old = JSON.parse(JSON.stringify(data));
 var x_neighbor = [-1,0,1,-1,1,-1,0,1]
 var y_neighbor = [1,1,1,0,0,-1,-1,-1]
 
-
 //main function
 function draw_data(){
 	if (regrid == 1){regrid=0;
@@ -237,7 +236,7 @@ function draw_data(){
 	document.getElementById('max_ele').innerHTML = max_elevation.toPrecision(4)
 	document.getElementById('basin_area').innerHTML = (max_area/1000/1000).toPrecision(3)
 
-	//document.write(typeof data[5][5],"<br>")
+	//document.write(typeof data[5][5],"<br>")evaluate_cmap(gray, 'viridis', false)[0]
 	//this normalizes the data and makes the range of values from 0 to 255 (8bit data)
 	for(var i=0; i<M; i++) {
 		for(var j=0; j< N; j++) {
@@ -247,10 +246,10 @@ function draw_data(){
 					
 					alpha = 0.0//1.0*(areanew[i][N-j-1]/max_area)
 					gray = data[i][N-j-1]/max_elevation
-					imagedata.data[pixelindex] = 255*((1.-alpha)*1.0*gray+alpha*68./255.); //Red
-					imagedata.data[pixelindex+1] = 255*((1.-alpha)*1.0*gray+alpha*176./255.); //Green
-					imagedata.data[pixelindex+2] = 255*((1.-alpha)*1.0*gray+alpha*255./255.); //Blue
-					imagedata.data[pixelindex+3] = 255*((1.-alpha)*1.0 + alpha); //Alpha			
+					imagedata.data[pixelindex] = 255*viridis[Math.round(gray*255)][0]//255*((1.-alpha)*1.0*gray+alpha*68./255.); //Red
+					imagedata.data[pixelindex+1] = 255*viridis[Math.round(gray*255)][1]//255*((1.-alpha)*1.0*gray+alpha*176./255.); //Green
+					imagedata.data[pixelindex+2] = 255*viridis[Math.round(gray*255)][2]//255*((1.-alpha)*1.0*gray+alpha*255./255.); //Blue
+					imagedata.data[pixelindex+3] = 255//255//255*((1.-alpha)*1.0 + alpha); //Alpha			
 
 				}
 			}

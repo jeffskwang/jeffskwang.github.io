@@ -11,7 +11,6 @@ permalink: /iLEM/
 </head>
 <body>
 
-
 <h1><b>Press the button below.</b></h1>
 <button class="favorite styled"
         type="button" id="start_model">
@@ -47,11 +46,13 @@ Rows:
 <div class="slidecontainer">
   <input type="range" min="1" max="5" value="5" class="slider" id="k_Range">
 	<b><i>K</i></b> = <span id="k_output"></span> 1&frasl;yr
-</div>
+</div> <br>
 
 <figure style="text-align:left;">
-	<canvas id="myCanvas" width = "420" height ="420" onmousedown="draw_on(event)" onmouseup = "draw_off(event)" onmousemove = "mouse_loc(event)" onmouseout = "start_sim(event)" onmouseover = "start_draw(event)" style ="border:4px solid #bc3131;"></canvas>
+	<canvas id="myCanvas" width = "420" height ="420" style ="border:4px solid #000000;"></canvas> <br>
+	<script src="/assets/js/colormap.js" type="text/javascript"></script>
 	<script src="/assets/js/lem_game.js" type="text/javascript"></script>
+	Low Elevation <img src="/assets/images/viridis.png" style = "width: 300px;height:10p;display: inline-block"> High Elevation <br><br>
 	<figcaption style="text-align:justify">
 	Basin Area = <b><span id="basin_area"></span> km<sup>2</sup></b>	<br>
 	Lansdscape Evolution Speed = <b><span id="time_per_second"></span> kyr&frasl;sec</b>	<br>
@@ -63,6 +64,7 @@ Rows:
 		(4) Look at readout about model speed (years per second) and landscape relief (max elevation - min elevation).
 	</figcaption>
 </figure>
+
 
 <h1><b>Questions to Ask Yourself</b></h1>
 	<p style="text-align:justify">
