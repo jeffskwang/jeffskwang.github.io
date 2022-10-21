@@ -12,7 +12,7 @@ document.getElementById('k_output').innerHTML = (k_slider.value*0.000002).toPrec
 var button = document.getElementById("start_model");
 
 var ctx = canvas.getContext("2d");
-var max_canvas_width = 500	
+var max_canvas_width = 600	
 var dx = 25.
 var D = Math.pow(10.,d_slider.value / 2.)
 var pixelindex = 0;

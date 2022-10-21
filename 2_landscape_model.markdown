@@ -49,7 +49,7 @@ Rows:
 </div> <br>
 
 <figure style="text-align:left;">
-	<canvas id="myCanvas" width = "420" height ="420" style ="border:4px solid #000000;"></canvas> <br>
+	<canvas id="myCanvas" width = "600" height ="600" ></canvas> <br>
 	<script src="/assets/js/colormap.js" type="text/javascript"></script>
 	<script src="/assets/js/lem_game.js" type="text/javascript"></script>
 	Low Elevation <img src="/assets/images/viridis.png" style = "width: 300px;height:10p;display: inline-block"> High Elevation <br><br>
