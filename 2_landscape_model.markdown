@@ -23,13 +23,13 @@ permalink: /iLEM/
 
 Columns:
 <input type="text"
-           value="70"
+           value="100"
            style="width: 30px;"
            id="input_columns">
 <br>
 Rows:
 <input type="text"
-           value="70"
+           value="50"
            style="width: 30px;"
            id="input_rows">
 
@@ -54,7 +54,7 @@ Rows:
 	<script src="/assets/js/lem_game.js" type="text/javascript"></script>
 	<figcaption style="text-align:justify">
 	Basin Area = <b><span id="basin_area"></span> km<sup>2</sup></b>	<br>
-	Lansdscape Evolution Speed = <b><span id="time_per_second"></span> kyr/sec</b>	<br>
+	Lansdscape Evolution Speed = <b><span id="time_per_second"></span> kyr&frasl;sec</b>	<br>
 	Relief = <b><span id="max_ele"></span> m</b>	<br><br>
 	<b>Instructions:</b><br />
 		(1) Press "Start Model" to start the simulation.<br />

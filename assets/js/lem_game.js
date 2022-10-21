@@ -152,7 +152,7 @@ function draw_data(){
 		time_measure = new Date() - time_start
 		dt_measure += dt_lem
 		if (time_measure>1000){time_start = new Date();
-			document.getElementById('time_per_second').innerHTML = (dt_measure/1000.).toPrecision(3);
+			document.getElementById('time_per_second').innerHTML = (dt_measure/time_measure).toPrecision(3);
 			dt_measure = 0.0}
 
 		//this loop runs the diffusion equation
