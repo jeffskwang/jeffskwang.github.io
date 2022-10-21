@@ -63,6 +63,8 @@ var dt_measure = 0.0
 var shakeup = 0
 var regrid = 0
 
+document.getElementById('congrats').innerHTML = "Press the button below."
+
 d_slider.onchange = function(event){
   D = Math.pow(10.,d_slider.value / 2.);
   document.getElementById('d_output').innerHTML = D.toPrecision(2)
@@ -82,6 +84,7 @@ k_slider.onchange = function(event){
 }
 
 button.onclick = function(event){start=1;
+	document.getElementById('congrats').innerHTML = "Congratulations! You are a modeler!";
 	regrid = 1;
 	M = Number(columns.value) //data dimensions
 	N = Number(rows.value);

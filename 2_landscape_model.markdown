@@ -11,14 +11,13 @@ permalink: /iLEM/
 </head>
 <body>
 
-<h1><b>Press the button below.</b></h1>
+<h1><b><span id="congrats"></span></b></h1>
 <button class="favorite styled"
         type="button" id="start_model">
     Start Model
 </button>
 
 <br><br>
-<h1><b>Congratulations! You're a modeler.</b></h1>
 
 Columns:
 <input type="text"
@@ -32,7 +31,7 @@ Rows:
            style="width: 30px;"
            id="input_rows">
 
-
+<br><br>
 <div class="slidecontainer">
   <input type="range" min="-2" max="2" value="0" class="slider" id="d_Range">
 	<b><i>D</i></b> = <span id="d_output"></span> m<sup>2</sup>&frasl;yr
