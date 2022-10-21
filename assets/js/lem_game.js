@@ -23,8 +23,8 @@ var columns = document.getElementById('input_columns')
 
 var M = Number(columns.value) //data dimensions
 var N = Number(rows.value);
-if (M >= N){var scale = Math.floor(max_canvas_size/M); document.write('meow')}
-else if (N > M) {var scale = Math.floor(max_canvas_size/N); document.write('meow mix')}
+if (M >= N){var scale = Math.floor(max_canvas_size/M)}
+else if (N > M) {var scale = Math.floor(max_canvas_size/N)}
 ctx.canvas.width = M * scale
 ctx.canvas.height = N * scale
 var imagedata = ctx.createImageData(ctx.canvas.width, ctx.canvas.height)
