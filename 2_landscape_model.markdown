@@ -21,7 +21,7 @@ permalink: /iLEM/
 
 Columns:
 <input type="text"
-           value="100"
+           value="200"
            style="width: 30px;"
            id="input_columns">
 <br>
