@@ -73,7 +73,7 @@ var i_end = M
 var j_start = 0
 var j_end = N
 
-document.getElementById('congrats').innerHTML = "Press the button below."
+document.getElementById('congrats').innerHTML = "Press the button"
 
 d_slider.onchange = function(event){
   D = (Math.pow(10.,d_slider.value / 2.));
@@ -160,9 +160,6 @@ function draw_data(){
 			document.getElementById('time_per_second').innerHTML = (dt_measure/time_measure).toPrecision(3);
 			dt_measure = 0.0}
 
-		document.getElementById('D_display').innerHTML = D
-		document.getElementById('U_display').innerHTML = U
-		document.getElementById('K_display').innerHTML = K_SPL
 		//Determine Drainage Area and Slope
 		for(var i=0; i<M; i++) {
 			for(var j=0; j< N; j++) {
