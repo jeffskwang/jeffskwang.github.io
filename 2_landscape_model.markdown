@@ -260,7 +260,7 @@ permalink: /LEM/
 
 	<p style="text-align:justify">A non-zero solution would mean the landscape only contains concave-upward hillslopes. This is not a stable condition because it is difficult to create a landscape without concave-downward regions (ridges). Instead, <b>a landscape without uplift would tend towards a solution where both slope and curvature are zero</b> (a flat horizontal plane).</p>
 	
-	<p style="font-size:120%;margin-left:20px"><b>Discuss</b></p>
+	<p style="font-size:120%;margin-left:20px"><b>Discussion Questions</b></p>
 	<ol style="margin-left:50px">
 		<li>Do landscapes that have been tectonically inactive for long periods become flat in nature?</li>
 		<li>Why or why not?</li>
@@ -277,7 +277,7 @@ permalink: /LEM/
 		<li>For a constant $U$ and $K$, $A \propto S^{-m/n}$</li>
 	</ul>
 	
-	<p style="font-size:120%;margin-left:20px"><b>Discuss</b></p>
+	<p style="font-size:120%;margin-left:20px"><b>Discussion Questions</b></p>
 	<ol style="margin-left:50px">
 		<li>What do these proportional statements tell us how the landscape responds to $U$ and $K$?</li>
 		<li>What is the shape of an river elevation profile?</li>
@@ -293,7 +293,7 @@ permalink: /LEM/
 		<li>Curvature is uniform with a value of $-U/D$</li>
 	</ul>
 	
-	<p style="font-size:120%;margin-left:20px"><b>Discuss</b></p>
+	<p style="font-size:120%;margin-left:20px"><b>Discussion Questions</b></p>
 	<ol style="margin-left:50px">
 		<li>How do the hillslopes respond to changes in $U$</li>
 		<li>What is the shape of an hillslope elevation profile?</li>
@@ -384,11 +384,12 @@ permalink: /LEM/
 
 
 <h1><b>Questions to Ask Yourself</b></h1>
-	<p style="text-align:justify">
-		(1) What is the long-term landscape behavior? Does it keep changing or approach a stable state?<br>
-		(2) What effects do <b><i>D</i></b>, <b><i>U</i></b>, and/or <b><i>K</i></b> have on the relief of the landscape?<br>
-		(3) How much branching in the drainage network occurs with different variations in <b><i>D</i></b> and/or <b><i>K</i></b>?
-	</p>
+	<ol style="margin-left:50px">
+		<li>How does the landscape respond to gradual/drastic changes in uplift?</li>
+		<li>How does $U$, $D$, and $K$ affect the drainage network?</li>
+		<li>How does $U$, $D$, and $K$ affect relief of the landscape?</li>
+		<li>What effects do the boundary conditions and domain size have on the landscape morphology?</li>
+	</ol>
 
 
 
