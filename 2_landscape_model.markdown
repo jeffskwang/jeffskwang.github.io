@@ -384,8 +384,8 @@ permalink: /LEM/
 <h1><b>Questions to Ask Yourself</b></h1>
 	<ol style="margin-left:50px">
 		<li>How does the landscape respond to gradual/drastic changes in uplift?</li>
-		<li>How does $U$, $D$, and $K$ affect the drainage network?</li>
 		<li>How does $U$, $D$, and $K$ affect relief of the landscape?</li>
+		<li>How does $U$, $D$, and $K$ affect the drainage network?</li>
 		<li>What effects do the boundary conditions and domain size have on the landscape morphology?</li>
 	</ol>
 
