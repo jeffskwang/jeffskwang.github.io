@@ -85,7 +85,7 @@ permalink: /LEM/
 			<source src="/assets/research/tectonic.mp4" type="video/mp4">
 			Your browser does not support the video tag.
 		</video> 
-		<figcaption style="margin:0px 70px 0px 70px;text-align:justify"><b>Fig. 1</b>: Landscape subjucted to <b>tectonic uplift only</b>. $U$ = 1 mm&frasl;yr. At the end of the video, landscape is uplifted 500 m. Vertical exaggeration = 2.0; 1 sec = 50 kyr.</figcaption>
+		<figcaption style="margin:0px 70px 0px 70px;text-align:justify"><b>Fig. 1</b>: Landscape subjected to <b>tectonic uplift only</b>. $U$ = 1 mm&frasl;yr. At the end of the video, landscape is uplifted 500 m. Vertical exaggeration = 2.0; 1 sec = 50 kyr.</figcaption>
 	</figure>
 	<br>
 <br>
@@ -132,7 +132,7 @@ permalink: /LEM/
 		<li>[-]</li>
 
 		<li><b>Description</b></li>
-	  <li>rock erodiblity</li>
+	  <li>rock erodibility</li>
 	  <li>drainage area</li>
 	  <li>channel slope</li>
 	  <li>area exponent</li>
@@ -267,7 +267,7 @@ permalink: /LEM/
 	</ol>
 <br>
 
-<h1><b>Fluvially Dominated</b></h1>
+<h1><b>River Dominated</b></h1>
 	<p style="text-align:justify">In rivers, where hillslope processes can be ignored, the Eqn. 7 simplifies to</p>
 
 	<p style="font-size:150%;margin-left:25px">[9]  $U = KA^mS^n$</p>
@@ -299,7 +299,6 @@ permalink: /LEM/
 		<li>What is the shape of an hillslope elevation profile?</li>
 	</ol>
 <br>
-
 
 <h2><b>Time to run your own model!</b></h2>
 
@@ -345,21 +344,21 @@ permalink: /LEM/
 			</div></li>
 		</ul>
 
-<b>Physical Parameters</b>
-	<div class="slidecontainer">
-	  <input type="range" min="-8" max="-4" value="-6" class="slider" id="d_Range">
-		<b><i>D</i></b> = <span id="d_output"></span> m<sup>2</sup>&frasl;yr
-	</div>
+	<b>Physical Parameters</b>
+		<div class="slidecontainer">
+		  <input type="range" min="-8" max="-4" value="-6" class="slider" id="d_Range">
+			<b><i>D</i></b> = <span id="d_output"></span> m<sup>2</sup>&frasl;yr
+		</div>
 
-	<div class="slidecontainer">
-	  <input type="range" min="0" max="5" value="2" class="slider" id="u_Range">
-		<b><i>U</i></b> = <span id="u_output"></span> mm&frasl;yr
-	</div>
+		<div class="slidecontainer">
+		  <input type="range" min="0" max="5" value="2" class="slider" id="u_Range">
+			<b><i>U</i></b> = <span id="u_output"></span> mm&frasl;yr
+		</div>
 
-	<div class="slidecontainer">
-	  <input type="range" min="-12" max="-8" value="-10" class="slider" id="k_Range">
-		<b><i>K</i></b> = <span id="k_output"></span> 1&frasl;yr
-	</div> <br>
+		<div class="slidecontainer">
+		  <input type="range" min="-12" max="-8" value="-10" class="slider" id="k_Range">
+			<b><i>K</i></b> = <span id="k_output"></span> 1&frasl;yr
+		</div> <br>
 
 <figure style="text-align:left;">
 	<canvas id="myCanvas" width = "400" height ="200" ></canvas> <br>
@@ -368,7 +367,7 @@ permalink: /LEM/
 	Low $\eta$ <img src="/assets/images/viridis.png" style = "width: 300px;height:10p;display: inline-block"> High $\eta$ <br><br>
 	<figcaption style="text-align:justify">
 	Basin Area = <b><span id="basin_area"></span> km<sup>2</sup></b>	<br>
-	Lansdscape Evolution Speed = <b><span id="time_per_second"></span> kyr&frasl;sec</b>	<br>
+	Landscape Evolution Speed = <b><span id="time_per_second"></span> kyr&frasl;sec</b>	<br>
 	Relief = <b><span id="max_ele"></span> m</b>	<br><br>
 
 		<b>Instructions:</b><br/>
@@ -381,7 +380,6 @@ permalink: /LEM/
 		</ol>
 	</figcaption>
 </figure>
-
 
 <h1><b>Questions to Ask Yourself</b></h1>
 	<ol style="margin-left:50px">
