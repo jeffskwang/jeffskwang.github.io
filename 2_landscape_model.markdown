@@ -389,5 +389,8 @@ permalink: /LEM/
 		<li>What effects do the boundary conditions and domain size have on the landscape morphology?</li>
 	</ol>
 
+<h2><b>Landlab Activity</b></h2>
+<p style="text-align:justify"> A landlab activity notebook made in Google collab can be found <a href="https://colab.research.google.com/drive/1-KpbbCW2XNGGaBJSlqDKOXwqIvS1o0OI?usp=sharing">HERE</a>. </p>
+
 
 
