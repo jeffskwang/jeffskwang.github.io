@@ -51,7 +51,7 @@ function mouse_up(event) {
 
 //load DEM
 $.ajax({
-    url: "https://raw.githubusercontent.com/jeffskwang/jeffskwang.github.io/main/_data/dem_10.csv",
+    url: "https://raw.githubusercontent.com/jeffskwang/jeffskwang.github.io/main/_data/usa.csv",
     async: false,
     success: function (csvd) {
         data = $.csv.toArrays(csvd);
