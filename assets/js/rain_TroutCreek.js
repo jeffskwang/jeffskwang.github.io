@@ -12,12 +12,6 @@ var dt = 1
 //pixel index for printing the images
 var pixelindex = 0;
 
-//initialize max elevation
-var max_elevation = 0;
-
-//initialize max area
-var max_area = 0;
-
 //initialize alpha value for mixing water and topography image
 var alpha = 1.0
 
@@ -175,20 +169,6 @@ function draw_data(){
 		}
 	}
 	
-	//this loop finds the min and max of the dem, and the max area, Probably could be determined outside of the main function as it will not change (area will change, but not much)
-	//the color of the river scales with the amount of water, but I'm not sure this visualization adds much to the UX.
-	min_elevation = 100000000.0;
-	max_elevation = 0.0;
-	max_area = 0.0
-	//find max value, which i used to normalize the data
-	for(var i=0; i<M; i++) {
-		for(var j=0; j< N; j++) {
-			if (data[i][j]>max_elevation){max_elevation=data[i][j]};
-			if (data[i][j]<min_elevation){min_elevation=data[i][j]};
-			if (areanew[i][j]>max_area){max_area=areanew[i][j]};
-		}
-	}
-	
 	//this normalizes the data and makes the range of values from 0 to 255 (8bit data), sets the image pixel data.
 	for(var j=0; j<M; j++) {
 		for(var i=0; i< N; i++) {
@@ -196,7 +176,7 @@ function draw_data(){
 				for (var n=0; n <scale; n++){
 					pixelindex = (i * scale + j * scale * canvas.width + m + n * canvas.width) * 4;  					
 					if (areanew[i][N-j-1]>0.0){
-						alpha = 0.5+1.0*(areanew[i][N-j-1]/max_area)
+						alpha = 0.5+0.5*Math.min(1.0,(areanew[i][N-j-1]/(rad * rad * 3.1415)))
 						gray = render[i*scale+m][canvas.height-1-(j*scale+n)]
 						imagedata.data[pixelindex] = 255*((1.-alpha)*1.0*gray+alpha*68./255.); //Red
 						imagedata.data[pixelindex+1] = 255*((1.-alpha)*1.0*gray+alpha*176./255.); //Green
