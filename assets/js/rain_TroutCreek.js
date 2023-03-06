@@ -1,18 +1,40 @@
+//MARCH 5th update more commenting
+
+//get the canvas from the home page layout
 var canvas = document.getElementById("myCanvas");
-var ctx = canvas.getContext("2d");	
+
+//get the context of the canvas, 2d
+var ctx = canvas.getContext("2d");
+
+//set the time step	
 var dt = 1
-var D = 0.001
+
+//pixel index for printing the images
 var pixelindex = 0;
+
+//initialize max elevation
 var max_elevation = 0;
+
+//initialize max area
 var max_area = 0;
+
+//initialize alpha value for mixing water and topography image
 var alpha = 1.0
+
+//initalize gray scale image for topography
 var gray = 1.0
-var M = 190; //data dimensions
+
+//dimensions of the data 190 x 190 cells
+var M = 190;
 var N = 190;
+
+//set the scale up of the canvas vs. the width of the data. MUST BE A WHOLE NUMBER
 var scale = canvas.width/M;
+
+//set pixel data over the canvas (R,G,B,A) values for each pixel
 var imagedata = ctx.createImageData(canvas.width, canvas.height);
 
-//define variables for the neighbor cells in the diffusion model
+//define variables for the neighbor cells
 var Ncell = 0;
 var Scell = 0;
 var Wcell = 0;
@@ -24,15 +46,17 @@ var y_click = 0;
 
 //determines is the mouse button is pressed
 var click = 0;
-var alpha_cloud = 0.2
 
-//steepest descent
-var minx = -1
-var miny = -1
-var maxz = -100.
+//alpha value of the cloud
+var alpha_cloud = 0.2
 
 //rain cloud radius
 var rad = 15
+
+//steepest descent variables
+var minx = -1
+var miny = -1
+var maxz = -100.
 
 //this function determines where the mouse is on the canvas
 function rain_loc(event){
@@ -49,7 +73,7 @@ function mouse_up(event) {
 	click = 0
 }
 
-//load DEM
+//load DEM - NOTE: DEM must be in csv format and must not have any holes. Haven't found a way to import data otherwise. (FIGURE OUT BETTER SOLUTION?)
 $.ajax({
     url: "https://raw.githubusercontent.com/jeffskwang/jeffskwang.github.io/main/_data/trout_coarse15.csv",
     async: false,
@@ -62,8 +86,7 @@ $.ajax({
     }
 });
 
-
-//load render
+//load rendered image
 $.ajax({
     url: "https://raw.githubusercontent.com/jeffskwang/jeffskwang.github.io/main/_data/trout_render.csv",
     async: false,
@@ -83,7 +106,9 @@ for(var i=0; i<canvas.width; i++) {
     }
 }
 
-//make river matrix <- this is what the user draws
+//make rain array, area arrays
+//rain array is where the user clicks, area area shows the rivers
+//also fill the data array with dem data
 var rain = [];
 var areaold = [];
 var areanew = [];
@@ -99,13 +124,14 @@ for(var i=0; i<M; i++) {
     }
 }
 
+//parameters decribing where the neighbors are in (x,y) index space, dx_neighbor is distance to the corresponding neighbor
 var x_neighbor = [-1,0,1,-1,1,-1,0,1]
 var y_neighbor = [1,1,1,0,0,-1,-1,-1]
 var dx_neighbor = [Math.pow(2.0,0.5),1,Math.pow(2.0,0.5),1,1,Math.pow(2.0,0.5),1,Math.pow(2.0,0.5)]
 
-//main function
+//main function that runs over the page
 function draw_data(){
-	//this loop erodes a river into the landscape depending on where the mouse is
+	// if moused is clicked, this is where it rains
 	if (click == 1){
 		for(var i=0; i<M; i++) {
 			for(var j=0; j< N; j++) {
@@ -115,7 +141,8 @@ function draw_data(){
 			}
 		}
 	}
-	//this loop runs the diffusion equation
+
+	//this loop runs routes the flow one time step 
 	for(var i=0; i<M; i++) {
 		for(var j=0; j< N; j++) {
 			areanew[i][j] += rain[i][j]
@@ -124,6 +151,7 @@ function draw_data(){
 				maxz = -100.;
 				minx = -1;
 				miny = -1;
+				//loop through each neighbor and check the steepest descent
 				for (var k=0; k<8; k++){
 					i_neighbor = i + x_neighbor[k];
 					j_neighbor = j + y_neighbor[k];
@@ -146,7 +174,9 @@ function draw_data(){
 			}
 		}
 	}
-		
+	
+	//this loop finds the min and max of the dem, and the max area, Probably could be determined outside of the main function as it will not change (area will change, but not much)
+	//the color of the river scales with the amount of water, but I'm not sure this visualization adds much to the UX.
 	min_elevation = 100000000.0;
 	max_elevation = 0.0;
 	max_area = 0.0
@@ -158,8 +188,8 @@ function draw_data(){
 			if (areanew[i][j]>max_area){max_area=areanew[i][j]};
 		}
 	}
-	//document.write(typeof data[5][5],"<br>")
-	//this normalizes the data and makes the range of values from 0 to 255 (8bit data)
+	
+	//this normalizes the data and makes the range of values from 0 to 255 (8bit data), sets the image pixel data.
 	for(var j=0; j<M; j++) {
 		for(var i=0; i< N; i++) {
 			for (var m=0; m < scale; m++){ 
@@ -193,6 +223,7 @@ function draw_data(){
 		}
 	}
 	
+	//resets all the boundaries to zero, and sets the old area array as the new area array for the next timestep
 	for(var i=0; i<M; i++) {
 		for(var j=0; j< N; j++) {
 			areaold[i][j] = areanew[i][j];
