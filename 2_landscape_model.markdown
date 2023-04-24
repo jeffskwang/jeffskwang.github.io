@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Learn about Landscape Evolution
+title: Landcape Evolution
 permalink: /LEM/
 ---
 

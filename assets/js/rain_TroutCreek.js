@@ -1,7 +1,7 @@
 //MARCH 5th update more commenting
 
 //get the canvas from the home page layout
-var canvas = document.getElementById("myCanvas");
+var canvas = document.getElementById("RainCanvas");
 
 //get the context of the canvas, 2d
 var ctx = canvas.getContext("2d");
