@@ -99,12 +99,12 @@ permalink: /diffuse/
 
 <figure style="text-align:left;">
 	<script src="/assets/js/colormap.js" type="text/javascript"></script>
-	<canvas id="DiffuseCanvas" width="450" height="450" onmousedown="mouse_down(event)" onmouseup = "mouse_up(event)" onmousemove = "diffuse_loc(event)" onmouseout = "mouse_up(event)"></canvas>
+	<canvas id="DiffuseCanvas" width="500" height="500" onmousedown="mouse_down(event)" onmouseup = "mouse_up(event)" onmousemove = "diffuse_loc(event)" onmouseout = "mouse_up(event)"></canvas>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js" type="text/javascript"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/1.0.11/jquery.csv.js" type="text/javascript"></script>
 	<script src="/assets/js/diffuse_TroutCreek.js" type="text/javascript"></script>
 	<br>
-	Low $\eta$ <img src="/assets/images/terrain.png" style = "width: 500px;height:25px;display: inline-block"> High $\eta$ <br><br>
+	Low $\eta$ <img src="/assets/images/terrain.png" style = "width: 400px;height:20px;display: inline-block"> High $\eta$ <br><br>
 	<figcaption style="text-align:justify">
 
 		<b>Instructions:</b><br/>

@@ -24,8 +24,8 @@ var pixelindex = 0;
 var gray = 1.0
 
 //dimensions of the data 450 x 450 cells
-var M = 450;
-var N = 450;
+var M = 500;
+var N = 500;
 
 //set the scale up of the canvas vs. the width of the data. MUST BE A WHOLE NUMBER
 var scale = canvas.width/M;
