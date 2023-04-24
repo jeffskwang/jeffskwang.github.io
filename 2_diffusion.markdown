@@ -92,18 +92,19 @@ permalink: /diffuse/
 
 <h2><b>Local Hillslope Diffusion Model</b></h2>
 
-	<b>Physical Parameters</b>
 		<div class="slidecontainer">
-		  <input type="range" min="-8" max="-4" value="-6" class="slider" id="d_Range">
-			<b><i>D</i></b> = <span id="d_output"></span> m<sup>2</sup>&frasl;yr
+		  <input type="range" min="25" max="250" value="50" class="slider" id="rad_Range">
+			<b><i>Radius</i></b> = <span id="rad_output"></span> m
 		</div>
 
 <figure style="text-align:left;">
-	<canvas id="DiffuseCanvas" width="450" height="450"  style="display: block;margin: auto;" onmousedown="mouse_down(event)" onmouseup = "mouse_up(event)" onmousemove = "rain_loc(event)" onmouseout = "mouse_up(event)"></canvas>
+	<script src="/assets/js/colormap.js" type="text/javascript"></script>
+	<canvas id="DiffuseCanvas" width="450" height="450" onmousedown="mouse_down(event)" onmouseup = "mouse_up(event)" onmousemove = "diffuse_loc(event)" onmouseout = "mouse_up(event)"></canvas>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js" type="text/javascript"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/1.0.11/jquery.csv.js" type="text/javascript"></script>
 	<script src="/assets/js/diffuse_TroutCreek.js" type="text/javascript"></script>
-	Low $\eta$ <img src="/assets/images/viridis.png" style = "width: 300px;height:10p;display: inline-block"> High $\eta$ <br><br>
+	<br>
+	Low $\eta$ <img src="/assets/images/terrain.png" style = "width: 500px;height:25px;display: inline-block"> High $\eta$ <br><br>
 	<figcaption style="text-align:justify">
 
 		<b>Instructions:</b><br/>
