@@ -108,11 +108,8 @@ permalink: /diffuse/
 
 		<b>Instructions:</b><br/>
 		<ol>
-			<li>Press "Start Model" to start the simulation.</li>
-			<li>Change number of columns and rows to change the domain size. (Warning: Too many cells will be slow!)</li>
-			<li>Select which boundaries you want to be open.</li>
-			<li>Adjust the <i>hillslope diffusion coefficient</i> [<b><i>D</i></b>], <i>uplift rate</i> [<b><i>U</i></b>], and <i>rock erodibility coefficient</i> [<b><i>K</i></b>].</li>
-			<li>Look at readout about model speed (years per second) and landscape relief (max elevation - min elevation).</li>
+			<li>Move the circle and click to drive hillslope diffusion on the landscape.</li>
+			<li>Use the slider above to change the size of the circle.</li>
 		</ol>
 	</figcaption>
 </figure>
