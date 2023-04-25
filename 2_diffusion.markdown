@@ -74,22 +74,12 @@ permalink: /diffuse/
 </head>
 
 <body>
+<h1><b><span style="color:green;">Hillslope Processes (<a href="https://docs.google.com/presentation/d/1He0NAFRBt6n9554vKKsNbIOvWnyVwRKkI5TqjpAgwHY/edit?usp=sharing">Activity Slides</a>)</span></b></h1>
+	<p style="text-align:justify">Hillslope processes in landscape evolution models are simulated using a <b>hillslope diffusion model</b>.</p>
 
-<h2><b>Learning Goals and Student Learning Outcomes</b></h2>
-	The goal of this activity is to understand the role of hillslope processes on landscape evolution. After completing this activity, students should be able to:
- <ol>
-  <li>List processes that contribute to hillslope diffusion.</li>
-  <li>Recognize a diffusion equation.</li>
-  <li>Describe how hillslope processes affect landscape evolution.</li>
-	</ol> 
-<br>
+	<p style="font-size:150%;margin-left:25px">$\frac{\partial \eta}{\partial t} = D\nabla^2\eta$,</p>
 
-<h1><b><span style="color:green;">Hillslope Processes</span></b></h1>
-	<p style="text-align:justify">Hillslope processes in landscape evolution models are simulated using a <b>hillslope diffusion model</b> [Eqn. 4].</p>
-
-	<p style="font-size:150%;margin-left:25px">$\frac{\partial \eta}{\partial t} = D\nabla^2\eta$</p>
-
-	<p style="text-align:justify">$D$ determines the rate of hillslope diffusion [Fig. 4]. It models soil movement via:</p>
+	<p style="text-align:justify">where $\eta$ is elevation, $t$ is time, and $D$ is a hillslope diffusion coefficient. It models soil movement via:</p>
 		<ul style="margin-left:75px">
 			<li>rainsplash</li> 
 			<li>bioturbation</li> 
@@ -98,21 +88,7 @@ permalink: /diffuse/
 			<li>agricultural tillage</li>
 		</ul>
 
-	<p style="text-align:justify">What is <span title="Laplacian of elevation" style="color:gray;">$\nabla^2\eta$</span>? It is a symbol that represents the sum of second derivatives in the x and y direction, i.e., $\nabla^2\eta = \left(\frac{\partial^2\eta}{\partial x^2}\right) + \left(\frac{\partial^2\eta}{\partial y^2}\right)$. Remember from your calculus class that the 2nd derivative represents the slope of slope? We call $\nabla^2\eta$, <b>topographic curvature</b>.</p>
-
-	<ul class="parameters"  style="list-style: none;margin-right:200px;margin-left:0px">
-		<li><b>Parameter</b></li>
-	  <li>$D$</li>
-	  <li>$\nabla^2\eta$</li>
-
-	  <li><b>Unit</b></li>
-	  <li>[$\frac{L^2}{T}$]</li>
-	  <li>[$\frac{1}{L}$]</li>
-
-		<li><b>Description</b></li>
-	  <li>diffusion coefficient</li>
-	  <li>curvature</li>
-	</ul> 
+	<p style="text-align:justify">What is <span title="Laplacian of elevation">$\nabla^2\eta$</span>? It is a symbol that represents the sum of second derivatives in the x and y direction, i.e., $\nabla^2\eta = \left(\frac{\partial^2\eta}{\partial x^2}\right) + \left(\frac{\partial^2\eta}{\partial y^2}\right)$. Remember from your calculus class that the 2nd derivative represents the slope of slope? We call $\nabla^2\eta$, <b>topographic curvature</b>.</p>
 
 <h2><b>Local Hillslope Diffusion Model</b></h2>
 		<div class="slidecontainer">
