@@ -3,7 +3,6 @@
 //get the canvas from the home page layout
 var canvas = document.getElementById("DiffuseCanvas");
 
-
 var rad_slider = document.getElementById("rad_Range");
 document.getElementById('rad_output').innerHTML = rad_slider.value
 
@@ -50,7 +49,7 @@ var y_circ = 0;
 var click = 0;
 
 //diffuse cloud radius
-var rad = 55
+var rad = rad_slider.value / dx
 
 //steepest descent variables
 var minx = -1
@@ -59,8 +58,8 @@ var maxz = -100.
 
 //radius slider
 rad_slider.onchange = function(event){
-  rad = rad_slider.value;
-  document.getElementById('rad_output').innerHTML = rad
+  rad = rad_slider.value / dx;
+  document.getElementById('rad_output').innerHTML = rad * dx
   shakeup = 1
 }
 //this function determines where the mouse is on the canvas
@@ -118,11 +117,6 @@ for(var i=0; i<M; i++) {
 }
 relief = max_elevation - min_elevation;
 
-//parameters decribing where the neighbors are in (x,y) index space, dx_neighbor is distance to the corresponding neighbor
-var x_neighbor = [-1,0,1,-1,1,-1,0,1]
-var y_neighbor = [1,1,1,0,0,-1,-1,-1]
-var dx_neighbor = [Math.pow(2.0,0.5),1,Math.pow(2.0,0.5),1,1,Math.pow(2.0,0.5),1,Math.pow(2.0,0.5)]
-
 //main function that runs over the page
 function draw_data(){
 	// if moused is clicked, this is where it rains
@@ -137,24 +131,24 @@ function draw_data(){
 	}
 
 	for(var i=0; i<N; i++) {
-	for(var j=0; j<M; j++) {
-		if(diffuse[i][j] == 1){
-			Ncell = i + 1;
-			if (Ncell>=M){Ncell=M-1}
-			Wcell = j - 1;
-			if (Wcell<0){Wcell=0}
-			Ecell = j + 1;
-			if (Ecell>=N){Ecell=N-1}
-			Scell = i - 1;
-			if (Scell<0){Scell=0}
-			
-			Neta = data_old[Ncell][j]
-			Seta = data_old[Scell][j]
-			Weta = data_old[i][Wcell]
-			Eeta = data_old[i][Ecell]
-			eta = data_old[i][j]
-			
-			data[i][j] += D * dt_lem * ((Neta - 2.0 * eta + Seta)/dx/dx+(Weta - 2.0 * eta + Eeta)/dx/dx);	
+		for(var j=0; j<M; j++) {
+			if(diffuse[i][j] == 1){
+				Ncell = i + 1;
+				if (Ncell>=M){Ncell=M-1}
+				Wcell = j - 1;
+				if (Wcell<0){Wcell=0}
+				Ecell = j + 1;
+				if (Ecell>=N){Ecell=N-1}
+				Scell = i - 1;
+				if (Scell<0){Scell=0}
+				
+				Neta = data_old[Ncell][j]
+				Seta = data_old[Scell][j]
+				Weta = data_old[i][Wcell]
+				Eeta = data_old[i][Ecell]
+				eta = data_old[i][j]
+
+				data[i][j] += D * dt_lem * ((Neta - 2.0 * eta + Seta)/dx/dx+(Weta - 2.0 * eta + Eeta)/dx/dx);	
 			}	
 		}
 	}
@@ -190,7 +184,7 @@ function draw_data(){
 	ctx.beginPath();
 	ctx.arc(x_circ , y_circ - (N-j-1), rad, 0, 2 * Math.PI, false);
 	ctx.lineWidth = 2;
-	ctx.strokeStyle = '#FF4500';
+	ctx.strokeStyle = '#000000';
 	ctx.stroke();
 }	
 

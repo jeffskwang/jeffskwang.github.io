@@ -32,29 +32,62 @@ permalink: /diffuse/
     }
   };
 </script>
-</head>
-<body>
-</body>
 
-<h2><b>Learning Goals</b></h2>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+.slidecontainer {
+  width: 72%;
+}
+
+.slider {
+  -webkit-appearance: none;
+  width: 70%;
+  height: 25px;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.slider:hover {
+  opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  background: #000000;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  background: #000000;
+  cursor: pointer;
+}
+</style>
+
+</head>
+
+<body>
+
+<h2><b>Learning Goals and Student Learning Outcomes</b></h2>
+	The goal of this activity is to understand the role of hillslope processes on landscape evolution. After completing this activity, students should be able to:
  <ol>
-  <li>Review the main components of landscape evolution models</li>
-  <li>Understand basic concepts for running numerical models</li>
-  <li>Determine how geomorphic processes interact with interactive models</li>
-  <li>Introduce the concept of dynamic equilibrium in landscape evolution models</li>
+  <li>List processes that contribute to hillslope diffusion.</li>
+  <li>Recognize a diffusion equation.</li>
+  <li>Describe how hillslope processes affect landscape evolution.</li>
 	</ol> 
 <br>
 
 <h1><b><span style="color:green;">Hillslope Processes</span></b></h1>
-
-	<figure alt="Diffusion" style="width:200px;height:450px;float:right;padding-top:0px;padding-bottom:90px;padding-left:30px">
-		<img src="/assets/research/diffusion_triple.gif" alt="diffusion" style="width:200px;height:450px">
-		<figcaption style="text-align:justify"><b>Fig. 4</b>: 1D profile view of hillslope diffusion using different values of $D$.</figcaption>
-	</figure>
-
 	<p style="text-align:justify">Hillslope processes in landscape evolution models are simulated using a <b>hillslope diffusion model</b> [Eqn. 4].</p>
 
-	<p style="font-size:150%;margin-left:25px">[4] $\frac{\partial \eta}{\partial t} = D\nabla^2\eta$</p>
+	<p style="font-size:150%;margin-left:25px">$\frac{\partial \eta}{\partial t} = D\nabla^2\eta$</p>
 
 	<p style="text-align:justify">$D$ determines the rate of hillslope diffusion [Fig. 4]. It models soil movement via:</p>
 		<ul style="margin-left:75px">
@@ -80,21 +113,11 @@ permalink: /diffuse/
 	  <li>diffusion coefficient</li>
 	  <li>curvature</li>
 	</ul> 
-	
-	<figure>
-		<video width="600" height="300" style="display: block;margin: auto;" controls>
-			<source src="/assets/research/hillslope.mp4" type="video/mp4">
-			Your browser does not support the video tag.
-		</video> 
-		<figcaption style="margin:0px 70px 0px 70px;text-align:justify"><b>Fig. 5</b>: Previously uplifted and fluvial eroded landscape subjected to <b>hilllslope processes only</b>. $D$ = 0.2 m<sup>2</sup>&frasl;yr. A relatively high $D$ value is used for illustration. Vertical exaggeration = 2.0; 1 sec = 50 kyr.</figcaption>
-	</figure>
-<br>
 
 <h2><b>Local Hillslope Diffusion Model</b></h2>
-
 		<div class="slidecontainer">
-		  <input type="range" min="25" max="250" value="50" class="slider" id="rad_Range">
-			<b><i>Radius</i></b> = <span id="rad_output"></span> m
+		  <input type="range" min="100" max="1000" value="200" class="slider" id="rad_Range">
+			<b>Radius</b> = <span id="rad_output"></span> m
 		</div>
 
 <figure style="text-align:left;">
@@ -117,6 +140,7 @@ permalink: /diffuse/
 		</ol>
 	</figcaption>
 </figure>
+</body>
 
 
 
