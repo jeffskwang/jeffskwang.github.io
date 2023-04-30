@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Landcape Evolution
-permalink: /LEM/
+permalink: /teaching/LEM/
 ---
 
 <html>
@@ -35,6 +35,9 @@ permalink: /LEM/
 </head>
 <body>
 </body>
+<b>Disclaimer</b>: This a lesson plan for two 75-minute classes (lecture + lab) I taught for ESCI 4701 (<i>Geomorphology</i>) during Fall 2022/2023 at the University of Minnesota.
+<br>
+<br>
 
 <h2><b>Learning Goals</b></h2>
  <ol>

@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Hillslopes
-permalink: /diffuse/
+permalink: /teaching/diffuse/
 ---
 
 <html>
@@ -74,7 +74,10 @@ permalink: /diffuse/
 </head>
 
 <body>
-<h1><b><span style="color:green;">Hillslope Processes (<a href="https://docs.google.com/presentation/d/1He0NAFRBt6n9554vKKsNbIOvWnyVwRKkI5TqjpAgwHY/edit?usp=sharing">Activity Slides</a>)</span></b></h1>
+<b>Disclaimer</b>: This a lesson plan for a 20-minute teaching unit I taught in GRAD 8101 (<i>Teaching in Higher Education</i>) during Spring 2023 at the University of Minnesota.
+<br>
+<br>
+<h1><b><span style="color:green;">Hillslope Processes (<a href="https://docs.google.com/presentation/d/1He0NAFRBt6n9554vKKsNbIOvWnyVwRKkI5TqjpAgwHY/edit?usp=sharing">Lecture Slides</a>)</span></b></h1>
 	<p style="text-align:justify">Hillslope processes in landscape evolution models are simulated using a <b>hillslope diffusion model</b>.</p>
 
 	<p style="font-size:150%;margin-left:25px">$\frac{\partial \eta}{\partial t} = D\nabla^2\eta$,</p>
