@@ -148,12 +148,19 @@ permalink: /research/
 		By incorporating tillage erosion into a landscape evolution model, we can simulate and reproduce patterns of soil carbon (Fig. 9). Interactive model to come!		
 	</p>
 
-	<figure>
-		<video width="740" height="444" controls>
-			<source src="/assets/research/tillage.mp4" type="video/mp4">
+	<figure alt="Grid" style="width:600px;height:400px;margin: auto;">
+		<video width="600" height="400" controls>
+			<source src="/assets/research/tillage_blender.mp4" type="video/mp4">
 			Your browser does not support the video tag.
 		</video> 
 	<figcaption><b>Fig. 9</b> Simulation of landscape and soil organic carbon evolution due to tillage erosion.</figcaption>
+	</figure>
+
+	<br>
+	<br>
+
+	<figure alt="Grid" style="width:600px;height:640px;margin: auto;">
+		<div class="embed-container"><iframe width="600" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" title="cerro_gordo_soc_lem_results" src="//umn.maps.arcgis.com/apps/Embed/index.html?webmap=5a7b6fb4ed50430483ae29fb483721ec&extent=-93.6462,42.8979,-92.8497,43.26&zoom=true&previewImage=false&scale=true&disable_scroll=true&theme=light"></iframe></div>	<figcaption><b>Fig. 10</b> Example results of elevation change after 160 years in Cerro Gordo County in Iowa. The blue to red colormap represents -0.325 to 0.325 meters of change. </figcaption>
 	</figure>
 	
 <!---meow--->
