@@ -1,0 +1,11 @@
+main:
+  - title: "Research"
+    url: /research/
+  - title: "Interactive Teaching"
+    url: /teaching/
+  - title: "CV"
+    url: /cv/
+  - title: "Links"
+    url: /links/
+  - title: "The Cat"
+    url: /cat/

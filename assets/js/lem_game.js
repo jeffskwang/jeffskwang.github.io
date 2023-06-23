@@ -96,6 +96,8 @@ k_slider.onchange = function(event){
 button.onclick = function(event){start=1;
 	document.getElementById('congrats').innerHTML = "Congratulations! You are a modeler!";
 	regrid = 1;
+	if (max_canvas_size<Number(columns.value)){columns.value=max_canvas_size}
+	if (max_canvas_size<Number(rows.value)){rows.value=max_canvas_size}
 	M = Number(columns.value) //data dimensions
 	N = Number(rows.value);
 	if (M>=N){scale = Math.floor(max_canvas_size/M)}

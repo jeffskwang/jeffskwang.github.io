@@ -22,6 +22,10 @@ var gray = 1.0
 var M = 190;
 var N = 190;
 
+//button dimensions in pixels
+var button_x = 50;
+var button_y = 20;
+
 //set the scale up of the canvas vs. the width of the data. MUST BE A WHOLE NUMBER
 var scale = canvas.width/M;
 
@@ -82,7 +86,7 @@ $.ajax({
 
 //load rendered image
 $.ajax({
-    url: "https://raw.githubusercontent.com/jeffskwang/jeffskwang.github.io/main/_data/trout_render.csv",
+    url: "https://raw.githubusercontent.com/jeffskwang/jeffskwang.github.io/main/_data/trout_render_760.csv",
     async: false,
     success: function (csvd) {
         render = $.csv.toArrays(csvd);
@@ -191,7 +195,6 @@ function draw_data(){
 						imagedata.data[pixelindex+3] = 255*((1.-alpha_cloud)*1.0+alpha_cloud); //Alpha						
 						}
 						else{
-
 						imagedata.data[pixelindex] = render[i*scale+m][canvas.height-1-(j*scale+n)]*255; //Red
 						imagedata.data[pixelindex+1] = render[i*scale+m][canvas.height-1-(j*scale+n)]*255; //Green
 						imagedata.data[pixelindex+2] = render[i*scale+m][canvas.height-1-(j*scale+n)]*255; //Blue
@@ -202,6 +205,17 @@ function draw_data(){
 			}
 		}
 	}
+
+	for(var j=0; j<button_y; j++) {
+		for(var i=canvas.width-button_x; i<canvas.width; i++) {
+			pixelindex = (i + j * canvas.width) * 4;  
+			imagedata.data[pixelindex] = 255; //Red
+			imagedata.data[pixelindex+1] = 255; //Green
+			imagedata.data[pixelindex+2] = 255; //Blue
+			imagedata.data[pixelindex+3] = 255; //Alpha	
+		}
+	}
+
 	
 	//resets all the boundaries to zero, and sets the old area array as the new area array for the next timestep
 	for(var i=0; i<M; i++) {
