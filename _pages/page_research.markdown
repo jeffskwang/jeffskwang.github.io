@@ -127,6 +127,3 @@ By incorporating tillage erosion into a landscape evolution model, we can simula
 	</video> 
 	<figcaption><b>Fig. 9</b> Simulation of landscape and soil organic carbon evolution due to tillage erosion.</figcaption>
 </figure>
-
-
-

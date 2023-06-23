@@ -81,7 +81,7 @@ function mouse_up(event) {
 
 //load DEM - NOTE: DEM must be in csv format and must not have any holes. Haven't found a way to import data otherwise. (FIGURE OUT BETTER SOLUTION?)
 $.ajax({
-    url: "https://raw.githubusercontent.com/jeffskwang/jeffskwang.github.io/main/_data/trout_coarse10.csv",
+    url: "https://raw.githubusercontent.com/jeffskwang/jeffskwang.github.io/main/assets/data/trout_coarse10.csv",
     async: false,
     success: function (csvd) {
         data = $.csv.toArrays(csvd);
