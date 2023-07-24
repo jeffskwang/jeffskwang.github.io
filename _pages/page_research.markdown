@@ -1,7 +1,29 @@
 ---
 layout: single
 permalink: /research/
+classes: wide
+feature_row:
+  - image_path: /assets/gifs/feature_xlm.gif
+    title: "Physical Models"
+    excerpt: "Using glorified sandboxes to improve our understanding on landscape evolution."
+    url: "/research/xlm"
+    btn_class: "btn--primary"
+    btn_label: "Learn more"
+  - image_path: /assets/gifs/feature_lem.gif
+    title: "Numerical Models"
+    excerpt: "Applying equations to determine the roles of geomorphologic mechanisms."
+    url: "/research/lem"
+    btn_class: "btn--primary"
+    btn_label: "Learn more"
+  - image_path: /assets/gifs/feature_agg.gif
+    title: "Agricultural Landscapes"
+    excerpt: "Developing landscape evolution models to address anthropogenic change."
+    url: "/research/agg"
+    btn_class: "btn--primary"
+    btn_label: "Learn more"     
 ---
+
+
 <html>
 <head>
 <style>
@@ -35,95 +57,4 @@ I study how landscapes respond to climate and tectonics using numerical models, 
 </figure>
 
 # <b>Research Topics</b>
-## <b>Initial Conditions</b>
-I am particularly interested in how the initial topography affects landscape evolution modeling. Typically for initial topographies, modelers start with a flat landscape and then add random, small topographic perturbations.
-
-However, when you deliberately add structure (e.g., a small channel) to the initial topography, its signal is amplified and permanently retained in the landscape as a valley. We call this phenomenon, <b>Extreme Memory</b>. See for yourself; draw your own initial condition in Fig. 2! See more in <a href="https://doi.org/10.1029/2019GL083305"><b>Kwang and Parker (2019)</b></a>.
-<figure alt="Initial Conditions" style="width:350px;height:460px" class="align-center">
-		<canvas id="myCanvas" width = "350" height ="350"   onmousedown="draw_on(event)" onmouseup = "draw_off(event)" onmousemove = "mouse_loc(event)" onmouseout = "start_sim(event)" onmouseover = "start_draw(event)" style ="border:4px solid #252a34;"></canvas>
-		<script src="/assets/js/lem.js" type="text/javascript"></script>
-		<figcaption style="text-align:justify">
-			<b>Fig. 2</b> Draw your own initial condition!<br />
-			<b>Instructions:</b><br/>
-			(1) Hold down the mouse and draw an initial channel.<br />
-			(2) Move the mouse out of the box to run the model.
-		</figcaption>
-</figure>
-
-# <b>Experimental Landscapes</b>
-We also use small-scale experimental setups (Fig. 3) to study landscape evolution. Instead of rock, the substrate is made of a mixture of fine silica powder and water (and sometimes kaolinite). Instead of rain, precipitation comes in the form of mist. In these experiments, the substrate is either uplifted or the baselevel is lowered at a prescribed rate. Using this setup, mountains and valleys form within a matter of hours.
-
-<figure alt="XLM" style="width:400px;height:500px" class="align-center">
-	<img src="/assets/research/xlm_schematic.png">
-	<figcaption style="text-align:justify">
-		<b>Fig. 3</b> A schematic of the eXperimental Landscape Evolution (XLE) facility at the Saint Anthony Fall Laboratory. I was not the first to run models in this facility; please check out: 
-		<a href="https://doi.org/10.1002/2014WR016223"><b>Reinhardt and Ellis, 2015</b></a>;
-		<a href="https://doi.org/10.1002/2015WR017161"><b>Singh et al., 2015</b></a>;
-		<a href="https://doi.org/10.1126/science.aab0017"><b>Sweeney et al., 2015</b></a>; and
-		<a href="https://doi.org/10.1126/sciadv.1701683"><b>Tejedor et al., 2017</b></a>.
-	</figcaption>
-</figure>
-
-In our paper <a href="https://doi.org/10.1029/2019GL083305"><b>(Kwang and Parker, 2019)</b></a>, we drew initial channels in both numerical landscape evolution models (like Fig. 2) and physical experimental landscapes. While numerical landscapes evolved to retain signals of their initial conditions, experimental landscapes persistently reorganize to forget them. In our experiments, we observed lateral shifting of the channels that drove ridge migration, drainage capture, and stream capture.
-
-<figure alt="XLM_movie" style="width:500px;height:500px" class="align-center">
-	<video width="500" height="500" style="display: block;margin: auto;" controls>
-		<source src="/assets/research/dem_animated.mp4" type="video/mp4">
-		Your browser does not support the video tag.
-	</video> 
-<figcaption><b>Fig. 4</b> Movie of experimental landscape evolution.</figcaption>
-</figure>
-
-# <b>The Role of Lateral Migration in Landscape Evolution</b>
-
-The basic behavior of numerical models (Fig. 2) and experiments (Fig. 3) of landscape evolution models are quite different. The main differences are <b>(1)</b> numerical models exhibit Extreme Memory while the experiments do not, and <b>(2)</b> the numerical models tend towards a static state while experimental landscapes persistently reorganize. 
-
-<b>What's different?</b> In our experiments (Fig. 3), we observed channels that migrated laterally, which at the time, was not typically included in landscape evolution models. Recently, Langston and Tucker <a href="https://doi.org/10.5194/esurf-6-1-2018"><b>(2018)</b></a> developed sub-model that did just that. In our paper <a href="https://doi.org/10.5194/esurf-6-1-2018"><b>(Kwang et al., 2021)</b></a>, we found that numerical models that simulate lateral erosion processes behave similarly to the experimental landscapes (Fig. 5).
-	
-<figure alt="XLM_movie" style="width:500px;height:500px" class="align-center">
-	<video width="500" height="500" style="display: block;margin: auto;" controls>
-		<source src="/assets/research/pnas_animated.mp4" type="video/mp4">
-		Your browser does not support the video tag.
-	</video> 
-	<figcaption style="text-align:justify">
-		<b>Fig. 5</b> Movie of numerical landscape evolution with lateral channel migration.
-	</figcaption>
-</figure>
-	
-The main parameter that controlled the landscape's behavior was <i><b>K<sub>L</sub>/K<sub>V</sub></b></i>, the ratio of lateral and vertical erodibility. Erodibility describes how resistant a material is to erosion (lower = more resistant, higher = less resistant). In Fig. 6, we use a correlation coefficient to quantify how much memory of the initial condition the landscape retains. For larger values of <i>K<sub>L</sub>/K<sub>V</sub></i>, we found landscapes forget their initial conditions faster.
-
-<figure alt="correlation" style="width:420px;height:300px" class="align-center">
-	<img src="/assets/research/correlation.png">
-	<figcaption style="text-align:justify">
-		<b>Fig. 6</b> Correlation coefficients for different values of <i>K<sub>L</sub>/K<sub>V</sub></i>. As the coefficient becomes less than 1, the landscape loses memory of its initial condition. The steepness of the slope of the lines indicates the speed at which the landscape forgets its initial condition.
-	</figcaption>
-</figure>
-
-# <b>Agricultural Landscape Evolution</b>
-<figure alt="tillage" style="width:420px;height:270px" class="align-center">
-		<img src="https://get.pxhere.com/photo/tractor-field-farm-vehicle-crop-soil-dust-agriculture-dusty-ploughing-plough-historically-harvester-arable-working-machine-rural-area-plow-agricultural-machinery-agricultural-tractor-tillage-grass-family-485893.jpg">
-		<figcaption style="text-align:justify">
-			<b>Fig. 7</b> Tillage erosion. <a href="https://pxhere.com/en/photo/485893"><b>Stock Image Source</b></a> 
-		</figcaption>
-</figure>
-
-Tillage (Fig. 7) is used by farmers to prepare soil for growing crops. When the tractors drive their plows across the field, the soil is moved from high elevations to low elevation, causing a diffusional effect. This diffusional effect has also been studied in natural hillslopes <a href="https://doi.org/10.1029/97WR00534"><b>Fernandes and Dietrich, 1997</b></a>. However, coefficients of diffusion are estimated to be ~<b>2 orders</b> of magnitude larger than coefficients that describe natural processes.		
-
-<figure alt="Grid" style="width:600px;height:660px;margin: auto;">
-	<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d8027.5579790089405!2d-93.50810374698656!3d42.988135492990835!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1sen!2sus!4v1636490024748!5m2!1sen!2sus" width="600" height="600" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-	<figcaption style="text-align:justify">
-		<b>Fig. 8</b> Aerial image of an agricultural field. 
-	</figcaption>
-</figure>
-
-Remote sensing (Fig. 8) of agricultural fields reveals a consistent pattern where light soils are located on hilltops and dark soils are located in hollows (topographic lows). Lighter materials are associated with carbon-poor soils and darker materials are associated with carbon-rich soils <a href="https://doi.org/10.2136/sssaj2018.09.0318"><b>Thaler et al., 2019</b></a>. If you were to dig a hole in natural landscapes, you would typically find carbon-rich soils at the surface and more carbon-poor soils as you dig deeper (about 30-50 cm). Therefore, exposed carbon-poor soils on hilltops suggest significant soil erosion.
-
-By incorporating tillage erosion into a landscape evolution model, we can simulate and reproduce patterns of soil carbon (Fig. 9). Interactive model to come!		
-
-<figure alt="Grid" style="width:600px;height:450px;margin: auto;">
-	<video width="600" height="400" controls>
-		<source src="/assets/research/tillage_blender.mp4" type="video/mp4">
-		Your browser does not support the video tag.
-	</video> 
-	<figcaption><b>Fig. 9</b> Simulation of landscape and soil organic carbon evolution due to tillage erosion.</figcaption>
-</figure>
+{% include feature_row %}
