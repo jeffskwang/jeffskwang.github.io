@@ -34,7 +34,7 @@ toc: true
 </body>
 </html>
 
-**Disclaimer**: I developed this lesson plan for two 75-minute classes (lecture + lab) I taught for ESCI 4701 (<i>Geomorphology</i>) at the University of Minnesota (Fall 2022/2023).
+**Disclaimer**: This contains a 75-minute <a href="/teaching/LEM/">lesson plan</a> that I developed for ESCI 4701 (Geomorphology) during the Fall semester of 2022 at the University of Minnesota. The lesson plan includes animations rendered using Blender as well as an interactive landscape evolution model (Javascript) that students can use to explore qualitative relationships. Also included is an additional 75-minute activity where students use a <a href="https://colab.research.google.com/drive/1-KpbbCW2XNGGaBJSlqDKOXwqIvS1o0OI?usp=sharing">Python-notebook</a> (written in Google Collab) to explore landscape evolution using the Landlab library.
 
 # **Learning Goals**
 1. Review the main components of landscape evolution models

@@ -36,7 +36,7 @@ permalink: /teaching/diffuse/
 </style>
 </head>
 <body>
-<b>Disclaimer</b>: I developed this lesson plan for a 20-minute teaching unit in GRAD 8101 (<i>Teaching in Higher Education</i>) at the University of Minnesota (Spring 2023). These <a href="https://docs.google.com/presentation/d/1He0NAFRBt6n9554vKKsNbIOvWnyVwRKkI5TqjpAgwHY/edit?usp=sharing">lecture slides</a> accompany this lesson plan.
+<b>Disclaimer</b>: This contains a 20-minute lecture (<a href="https://docs.google.com/presentation/d/1He0NAFRBt6n9554vKKsNbIOvWnyVwRKkI5TqjpAgwHY/edit?usp=sharing">google slides</a>) + interactive model (<a href="/teaching/diffuse/">Javascript</a>) that I developed for GRAD 8101 (Teaching in Higher Education) during the Spring semester of 2023 at the University of Minnesota. It incorporates active learning techniques the probe the students knowledge on diffusion, mathematical equations, and hillslope processes. The Javascript model is an example of the type of interative models that I want to create to promote active learning as well as model-based learning.
 <br>
 <br>
 <h1><b><span>Hillslope Processes</span></b></h1>
