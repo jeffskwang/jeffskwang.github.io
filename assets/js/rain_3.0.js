@@ -185,12 +185,12 @@ $.ajax({
 //read in render image
 for(var i=0; i<canvas.width; i++) {
     for(var j=0; j<canvas.height; j++) {
-		render_R[i][j] = parseFloat(render_R[i][j]);//convert string to numbers
-		render_G[i][j] = parseFloat(render_G[i][j]);//convert string to numbers
-		render_B[i][j] = parseFloat(render_B[i][j]);//convert string to numbers
-		aerial_R[i][j] = parseFloat(aerial_R[i][j]);//convert string to numbers
-		aerial_G[i][j] = parseFloat(aerial_G[i][j]);//convert string to numbers
-		aerial_B[i][j] = parseFloat(aerial_B[i][j]);//convert string to numbers
+		render_R[i][j] = parseFloat(render_R[i][j])/255.;//convert string to numbers
+		render_G[i][j] = parseFloat(render_G[i][j])/255.;//convert string to numbers
+		render_B[i][j] = parseFloat(render_B[i][j])/255.;//convert string to numbers
+		aerial_R[i][j] = parseFloat(aerial_R[i][j])/255.;//convert string to numbers
+		aerial_G[i][j] = parseFloat(aerial_G[i][j])/255.;//convert string to numbers
+		aerial_B[i][j] = parseFloat(aerial_B[i][j])/255.;//convert string to numbers
     }
 }
 
