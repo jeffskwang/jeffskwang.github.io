@@ -52,6 +52,9 @@ var minx = -1
 var miny = -1
 var minz = 1000000.
 
+//Allow deposition?
+var deposition = false
+
 //LEM parameters
 var U = (u_slider.value*0.0002) //m/yr
 var dt_lem = 500. // yr
@@ -214,8 +217,10 @@ function draw_data(){
 				Weta = data_old[i][Wcell]
 				Eeta = data_old[i][Ecell]
 				eta = data_old[i][j]
-				
-				data[i][j] += D * dt_lem * ((Neta - 2.0 * eta + Seta)/dx/dx+(Weta - 2.0 * eta + Eeta)/dx/dx);		
+
+				curvature = (Neta - 2.0 * eta + Seta)/dx/dx+(Weta - 2.0 * eta + Eeta)/dx/dx
+				if (deposition == false && curvature > 0.0){curvature=0.0}
+				data[i][j] += D * dt_lem * curvature;		
 			}
 		}
 	}
