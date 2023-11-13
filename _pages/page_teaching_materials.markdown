@@ -1,6 +1,6 @@
 ---
 layout: single
-permalink: /teaching/materials
+permalink: /teaching/materials/
 classes: wide
 feature_row:
   - image_path: /assets/images/syllabus_Page_1.png
