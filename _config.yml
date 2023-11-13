@@ -56,7 +56,7 @@ plugins:
   - jekyll-include-cache
 
 author:
-  name   : "Jeffrey Kwang"
+  name   : "Jeffrey Kwang (He/Him)"
   avatar : "/assets/images/ebby.png"
   bio    : "I'm a geomorphologist, and I like to build models to understand how the Earth's surface evolves."
   links:

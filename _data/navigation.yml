@@ -3,6 +3,8 @@ main:
     url: /research/
   - title: "Interactive Teaching"
     url: /teaching/
+  - title: "Student Projects!"
+    url: /student_projects/
   - title: "CV"
     url: /cv/
   - title: "Links"
