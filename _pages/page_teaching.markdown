@@ -11,7 +11,7 @@ feature_row:
     btn_label: "Learn more"
   - image_path: /assets/gifs/lem_toy.gif
     title: "Intro to LEMs"
-    excerpt: "Two 75-minute active-learning lesson plans that introduce the main components of landscape evolution models (LEMs). Includes a Javascipt web-based model and a link to a Google Colab activity."
+    excerpt: "Two 75-minute online active-learning lesson plans that introduce the main components of landscape evolution models (LEMs). The webpage includes a Javascipt web-based model and a link to a Google Colab activity."
     url: "/teaching/LEM"
     btn_class: "btn--primary"
     btn_label: "Learn more" 
