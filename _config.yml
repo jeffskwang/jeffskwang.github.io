@@ -67,10 +67,10 @@ author:
       icon: "fab fa-fw fa-github"
       url: "https://github.com/jeffskwang"
     - label: "Scholar"
-      icon: "ai ai-google-scholar"
+      icon: "fab fa-brands fa-google"
       url: "https://scholar.google.com/citations?user=YCRgH6sAAAAJ&hl=en"
     - label: "ORCID"
-      icon: "ai ai-orcid"
+      icon: "fab fa-brands fa-orcid"
       url: "https://orcid.org/0000-0002-3165-9700"
 
 footer:
@@ -82,10 +82,10 @@ footer:
       icon: "fab fa-fw fa-github"
       url: "https://github.com/jeffskwang"
     - label: "Scholar"
-      icon: "ai ai-google-scholar"
+      icon: "fab fa-brands fa-google"
       url: "https://scholar.google.com/citations?user=YCRgH6sAAAAJ&hl=en"
     - label: "ORCID"
-      icon: "ai ai-orcid"
+      icon: "fab fa-brands fa-orcid"
       url: "https://orcid.org/0000-0002-3165-9700"
 
 defaults:
