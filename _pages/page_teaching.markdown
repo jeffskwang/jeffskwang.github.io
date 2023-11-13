@@ -21,6 +21,18 @@ feature_row:
     url: "https://doi.org/10.21105/jose.00129"
     btn_class: "btn--primary"
     btn_label: "Learn more" 
+  - image_path: /assets/images/lecture.png
+    title: "Example Lecture"
+    excerpt: "75-minute lecture on landscape evolution modeling using active-learning techniques. This lecture was given as part of a Geomorphology (ESCI 4701)."
+    url: "https://docs.google.com/presentation/d/1ce9wAD07DQmG6c32Q9DPDoN8KDTB5-C7wBagdQk51z4/edit?usp=sharing"
+    btn_class: "btn--primary"
+    btn_label: "Learn more" 
+  - image_path: /assets/images/example_syllabus.png
+    title: "Example Materials"
+    excerpt: "Example course materials: syllabus, lesson plan, and a major assignment for an upper-level course on landscape evolution modeling (4 credits)."
+    url: "/teaching/materials/"
+    btn_class: "btn--primary"
+    btn_label: "Learn more" 
 ---
 <h1><b>Example Interactive Learning Lesson Plans</b></h1>
 {% include feature_row %}

@@ -1,7 +1,6 @@
 ---
 layout: single
-classes: wide
 permalink: /cv/
 ---
 
-<embed src="/assets/pdf/cv_website.pdf" type="application/pdf" width="740px" height="2100px" />
+<embed src="/assets/pdf/cv_website.pdf" type="application/pdf" width="604px" height="782px" />
