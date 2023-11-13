@@ -25,7 +25,7 @@ permalink: /cat/
 
 <figure style="width:400px;height:295px" class="align-center">
 	<img src="/assets/pillsbury/research_assistant3.png">
-	<figcaption class="text-center"><b>Fig. 5</b> Cat Research Assistant really working. </figcaption>
+	<figcaption class="text-center"><b>Fig. 5</b> Why do you think it's called a ThinkPad? </figcaption>
 </figure>
 
 <figure style="width:300px;height:288px" class="align-center">
