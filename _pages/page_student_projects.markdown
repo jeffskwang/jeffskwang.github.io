@@ -1,6 +1,6 @@
 ---
 layout: single
-permalink: /student_projects
+permalink: /student_projects/
 classes: wide
 feature_row:
   - image_path: /assets/pdf/begay_poster.png
