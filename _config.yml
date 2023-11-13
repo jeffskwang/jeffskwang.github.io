@@ -60,15 +60,18 @@ author:
   avatar : "/assets/images/ebby.png"
   bio    : "I'm a geomorphologist, and I like to build models to understand how the Earth's surface evolves."
   links:
-    - label: "Website"
-      icon: "fas fa-fw fa-link"
-      url: "https://jeffskwang.github.io"
     - label: "Twitter"
       icon: "fab fa-fw fa-twitter-square"
       url: "https://twitter.com/jeffrey_kwang"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
       url: "https://github.com/jeffskwang"
+    - label: "Scholar"
+      icon: "ai ai-google-scholar"
+      url: "https://scholar.google.com/citations?user=YCRgH6sAAAAJ&hl=en"
+    - label: "ORCID"
+      icon: "ai ai-orcid"
+      url: "https://orcid.org/0000-0002-3165-9700"
 
 footer:
   links:
