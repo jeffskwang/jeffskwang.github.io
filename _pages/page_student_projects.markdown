@@ -17,7 +17,7 @@ feature_row:
     btn_label: "See Marco's Poster" 
   - image_path: /assets/pdf/agu_kwang_2022.png
     title: "My Posters"
-    excerpt: "Looking at old posters always helps remind me that I was once a student myself. Here are my AGU posters from 2014 to present."
+    excerpt: "Looking at old posters always helps remind me that I was once a student myself. Here are my most recent posters all the way back to 2012."
     url: "/student_projects/kwang"
     btn_class: "btn--primary"
     btn_label: "See my Old Posters" 
