@@ -3,6 +3,12 @@ layout: single
 permalink: /teaching/
 classes: wide
 feature_row:
+  - image_path: /assets/gifs/flooding.gif
+    title: "Flooding"
+    excerpt: "Under Construction"
+    url: "/teaching/flooding/"
+    btn_class: "btn--primary"
+    btn_label: "Learn more"
   - image_path: /assets/gifs/diffusion_toy.gif
     title: "Hillslope Diffusion"
     excerpt: "A 20-minute active-learning lesson plan to introduce the diffusion equation and how it is applied to simulate hillslope processes. Includes a Javascipt web-based model that allows students to diffuse a Minnesota landscape."
