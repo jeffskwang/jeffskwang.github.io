@@ -48,22 +48,24 @@ classes: wide
 <p style="text-align:justify">The flood peaked at 4:00 AM on Saturday June 29, 2024; this is when the flood reached its highest height. For rivers, we call the height of the water the <b><i>gage height</i></b>. Using the <a href="https://fim.wim.usgs.gov/fim/?site_no=05331000">Flood Inundation Mapper</a>, estimate the peak height of the river by adjusting the gage height until it matches the flooded area in the video.</p>
 </body> 
 
-<figure alt="FloodModel" style="width:1000px;height:450px"  class="align-left">
-	<div id="svg-container"></div>
-	<figcaption style="text-align:center"><b>Click the big red button!</b>: This will randomly pick a river flow.</figcaption>
+<h1><b><span>What is the 100-yr Flood?</span></b></h1>
+	<p style="text-align:justify">The flow of 115,000 cubic feet per second corresponds to a ~18-yr flood. Meaning, there is a 1-in-18 chance that this flow or higher will occur in the river near Saint Paul. So that means a 100-yr flood is a flood that has a 1-in-100 chance to occur. Below is a river cross-section, which is like a slice made across the river.</p>
+
+<figure alt="river_xs" style="width:800px;height:500px" class="align-center">
+	<img src="/assets/images/river_xs.jpg">
+	<figcaption style="text-align:center"><b>River Cross-Section</b>: This is a slice of the across a river.</figcaption>
 </figure>
 
-<h1><b><span>What is the 100-yr Flood?</span></b></h1>
-	<p style="text-align:justify">The flow of 115,000 cubic feet per second corresponds to a ~18-yr flood. Meaning, there is a 1-in-18 chance that this flow or higher will occur in the river near Saint Paul. So that means a 100-yr flood is a flood that has a 1-in-100 chance to occur.</p>
+<figure alt="river_xs" style="width:500px;height:550px" class="align-center">
+	<img src="/assets/svgs/ffc.svg">
+	<figcaption style="text-align:center"><b>Flood frequency analysis</b>: Larger floods are more rare and therefore have a larger reccurence interval.</figcaption>
+</figure>
 
-
-
-<h2><b> Design your own USGS Keychain. Note: This is only availible for the Eureka! 2024 workshop participants. Code will be shared in the future to design your own.</b> <a href="https://z.umn.edu/usgs3dprint">Google Form</a>.</h2>
-
-
-
+<figure alt="FloodModel" style="width:1000px;height:450px"  class="align-left">
+	<div id="svg-container"></div>
+	<figcaption style="text-align:center"><b>Click the big red button!</b>: This will randomly pick an annual flood.</figcaption>
+</figure>
 </html>
-
 
 <script>
 
