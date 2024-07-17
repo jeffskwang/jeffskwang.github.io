@@ -1,6 +1,7 @@
 ---
 layout: single
 permalink: /teaching/flooding/
+classes: wide
 ---
 
 <html>
@@ -21,8 +22,8 @@ permalink: /teaching/flooding/
 			  column-count: 2; 
       }
 </style>
-<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script src="https://d3js.org/d3.v7.min.js"></script>
 <script>
   MathJax = {
     tex: {
@@ -36,47 +37,89 @@ permalink: /teaching/flooding/
 </style>
 </head>
 <body>
-<b>Disclaimer</b>: This contains a 20-minute lecture (<a href="https://docs.google.com/presentation/d/1He0NAFRBt6n9554vKKsNbIOvWnyVwRKkI5TqjpAgwHY/edit?usp=sharing">google slides</a>) + interactive model (<a href="/teaching/diffuse/">Javascript</a>) that I developed for GRAD 8101 (Teaching in Higher Education) during the Spring semester of 2023 at the University of Minnesota. It incorporates active learning techniques the probe the students knowledge on diffusion, mathematical equations, and hillslope processes. The Javascript model is an example of the type of interative models that I want to create to promote active learning as well as model-based learning.
+<b>Disclaimer</b>: This teaching lecture is meant to supplement two 1-hr lectures for the <a href="https://www.ywcampls.org/girls-inc-eureka">Eureka!</a> program.
 <br>
 <br>
-<h1><b><span>Hillslope Processes</span></b></h1>
-	<p style="text-align:justify">Hillslope processes in landscape evolution models are simulated using a <b>hillslope diffusion model</b>.
-		$$\frac{\partial \eta}{\partial t} = D\nabla^2\eta,$$
-		where $\eta$ is elevation, $t$ is time, and $D$ is a hillslope diffusion coefficient. It models soil movement via:</p>
-		<ul style="margin-left:25px">
-			<li>rainsplash</li> 
-			<li>bioturbation</li> 
-			<li>freeze-thaw processes</li>
-			<li>creep</li>
-			<li>agricultural tillage</li>
-		</ul>
-<br>
-<p style="text-align:justify">What is <span title="Laplacian of elevation">$\nabla^2\eta$</span>? It is a symbol that represents the sum of second derivatives in the x and y direction, i.e., $\nabla^2\eta = \left(\frac{\partial^2\eta}{\partial x^2}\right) + \left(\frac{\partial^2\eta}{\partial y^2}\right)$. Remember from your calculus class that the 2nd derivative represents the slope of slope? We call $\nabla^2\eta$, <b>topographic curvature</b>.</p>
+<h1><b><span>Flooding on the Mississippi in St. Paul, MN</span></b></h1>
+	<p style="text-align:justify">In late June 2024, the Mississippi River reached flows of 115,000 cubic feet per second. Below is a timelapse of the Mississippi River near St. Paul that was taken from a USGS river gage from June 23rd to July 7th, 2024. If you would like to see more images, click this <a href="https://apps.usgs.gov/hivis/camera/MN_Mississippi_River_at_St_Paul">link</a>.</p>
 
-<h1><b>Local Hillslope Diffusion Model</b></h1>
-		<div class="slidecontainer">
-			<b>Radius</b> = <span id="rad_output"></span> m
-		  <input type="range" min="100" max="1000" value="200" class="slider" id="rad_Range">
-		</div>
-	<figure style="width:500px;height:500px" class="align-center">
-		<script src="/assets/js/colormap.js" type="text/javascript"></script>
-		<canvas id="DiffuseCanvas" width="500" height="500" onmousedown="mouse_down(event)" onmouseup = "mouse_up(event)" onmousemove = "diffuse_loc(event)" onmouseout = "mouse_up(event)"></canvas>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js" type="text/javascript"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/1.0.11/jquery.csv.js" type="text/javascript"></script>
-		<script src="/assets/js/diffuse_TroutCreek.js" type="text/javascript"></script>
-		<figcaption class="text-center"> Low $\eta$ <img src="/assets/images/terrain.png" style = "width:300px;height:20px;display: inline-block"> High $\eta$</figcaption>
-	</figure>
-	<br>
-	<p style="text-align:justify">
-		<b>Instructions:</b>
-		<ol>
-			<li>Move the circle and click to drive hillslope diffusion on the landscape.</li>
-			<li>Use the slider above to change the size of the circle.</li>
-		</ol>
-	</p>
-</body>
+{% include video id="X0YyIFIt7Cg" provider="youtube" %}
+
+<p style="text-align:justify">The flood peaked at 4:00 AM on Saturday June 29, 2024; this is when the flood reached its highest height. For rivers, we call the height of the water the <b><i>gage height</i></b>. Using the <a href="https://fim.wim.usgs.gov/fim/?site_no=05331000">Flood Inundation Mapper</a>, estimate the peak height of the river by adjusting the gage height until it matches the flooded area in the video.</p>
+</body> 
+
+<figure alt="FloodModel" style="width:1000px;height:450px"  class="align-left">
+	<div id="svg-container"></div>
+	<figcaption style="text-align:center"><b>Click the big red button!</b>: This will randomly pick a river flow.</figcaption>
+</figure>
+
+<h1><b><span>What is the 100-yr Flood?</span></b></h1>
+	<p style="text-align:justify">The flow of 115,000 cubic feet per second corresponds to a ~18-yr flood. Meaning, there is a 1-in-18 chance that this flow or higher will occur in the river near Saint Paul. So that means a 100-yr flood is a flood that has a 1-in-100 chance to occur.</p>
+
+
+
+<h2><b> Design your own USGS Keychain. Note: This is only availible for the Eureka! 2024 workshop participants. Code will be shared in the future to design your own.</b> <a href="https://forms.gle/pf4Fbo3AEwCjwnXq8">Google Form</a>.</h2>
+
+
+
 </html>
 
 
+<script>
+
+    const flood_rgb = "#1f77b4"
+
+	d3.xml("/assets/svgs/xs.svg").then(function(data) {
+    const svg_node= document.getElementById("svg-container").appendChild(data.documentElement);
+	
+	const svg_plot = d3.select(svg_node)
+    
+	let previous_flow = 1;
+
+	function click(event) {
+		console.log(previous_flow)
+        if (event.currentTarget.id.startsWith("BUTTON")){
+			d3.select("#flood_" + previous_flow).selectAll("path")
+				.style("fill", flood_rgb)
+				.style("opacity", 0.0);
+
+			var num = Math.random();
+			var inv_num = 1.0 / num;
+			if (inv_num > 10000){inv_num = 10000}
+			var inv_num_round = Math.round(inv_num);
+
+			var P = 10000.0 / inv_num_round;
+			var P_round =  Math.round(P) / 100.;
+			var H = Math.pow(((10000. + 32656.25 * Math.log10(inv_num_round)) / 156.25), 1.0 / 2.0)
+			var H_round =  Math.round(H*10.) / 10.;
+
+			d3.select("#flood_" + inv_num_round.toString()).selectAll("path")
+				.style("fill", flood_rgb)
+				.style("opacity", 1.0);
+
+			d3.select("#Reccu_Val").selectAll("text")
+				.text(inv_num_round.toString() + "-yr flood")
+                .style("opacity",1);
+			d3.select("#Proba_Val").selectAll("text")
+				.text(P_round.toString() + "%")
+                .style("opacity",1);
+			d3.select("#Stage_Val").selectAll("text")
+				.text(H_round.toString() + " ft")
+                .style("opacity",1);
+
+
+			previous_flow = inv_num_round.toString();
+		}
+    }
+
+	svg_plot.selectAll("g")
+		.on("click", (event) => click(event))
+
+	}).catch(function(error) {
+    console.error(error);
+	});
+
+
+</script>
 
 
