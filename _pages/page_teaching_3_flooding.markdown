@@ -58,7 +58,7 @@ classes: wide
 
 
 
-<h2><b> Design your own USGS Keychain. Note: This is only availible for the Eureka! 2024 workshop participants. Code will be shared in the future to design your own.</b> <a href="https://forms.gle/pf4Fbo3AEwCjwnXq8">Google Form</a>.</h2>
+<h2><b> Design your own USGS Keychain. Note: This is only availible for the Eureka! 2024 workshop participants. Code will be shared in the future to design your own.</b> <a href="https://z.umn.edu/usgs3dprint">Google Form</a>.</h2>
 
 
 
