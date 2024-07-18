@@ -45,20 +45,23 @@ classes: wide
 
 {% include video id="X0YyIFIt7Cg" provider="youtube" %}
 
-<p style="text-align:justify">The flood peaked at 4:00 AM on Saturday June 29, 2024; this is when the flood reached its highest height. For rivers, we call the height of the water the <b><i>gage height</i></b>. Using the <a href="https://fim.wim.usgs.gov/fim/?site_no=05331000">Flood Inundation Mapper</a>, estimate the peak height of the river by adjusting the gage height until it matches the flooded area in the video.</p>
+<p style="text-align:justify">The flood peaked at 4:00 AM on Saturday June 29th, 2024; this is when the flood reached its highest height. For rivers, we call the height of the water the <b><i>gage height</i></b>. Using the <a href="https://fim.wim.usgs.gov/fim/?site_no=05331000">Flood Inundation Mapper</a>, estimate the peak height of the river by adjusting the gage height until it matches the flooded area in the video.</p>
 </body> 
 
-<h1><b><span>What is the 100-yr Flood?</span></b></h1>
-	<p style="text-align:justify">The flow of 115,000 cubic feet per second corresponds to a ~18-yr flood. Meaning, there is a 1-in-18 chance that this flow or higher will occur in the river near Saint Paul. So that means a 100-yr flood is a flood that has a 1-in-100 chance to occur. Below is a river cross-section, which is like a slice made across the river.</p>
+<h1><b><span>What is a 100-yr Flood?</span></b></h1>
+	<p style="text-align:justify">A flow of 115,000 cubic feet per second corresponds to a ~18-yr flood. Meaning, there is a 1-in-18 chance that this flow or higher will occur in the river near St. Paul. That means a 100-yr flood is a flood that has a 1-in-100 chance to occur. Below is a graph of the highest flood for each year of record. On the y-axis, each flood corresponds to a different #-yr flood.</p>
 
-<figure alt="river_xs" style="width:800px;height:500px" class="align-center">
-	<img src="/assets/images/river_xs.jpg">
-	<figcaption style="text-align:center"><b>River Cross-Section</b>: This is a slice of the across a river.</figcaption>
-</figure>
-
-<figure alt="river_xs" style="width:500px;height:550px" class="align-center">
+<figure alt="flood frequency analysis" style="width:500px;height:550px" class="align-center">
 	<img src="/assets/svgs/ffc.svg">
 	<figcaption style="text-align:center"><b>Flood frequency analysis</b>: Larger floods are more rare and therefore have a larger reccurence interval.</figcaption>
+</figure>
+
+<h1><b><span>Simulating Floods</span></b></h1>
+	<p style="text-align:justify">Simulating floods is just like a game of chance. We will use a random number generator, to select the highest flow of the year. Below, we will simulate annual flooding on a hypothetical river by hitting the big red button. We will view the river's cross-section, which is just a slice image that we take across the river.</p>
+
+<figure alt="river_xs" style="width:600px;height:350px" class="align-center">
+	<img src="/assets/images/river_xs.jpg">
+	<figcaption style="text-align:center"><b>River Cross-Section</b>: This is a slice of the across a river.</figcaption>
 </figure>
 
 <figure alt="FloodModel" style="width:1000px;height:450px"  class="align-left">
@@ -77,9 +80,30 @@ classes: wide
 	const svg_plot = d3.select(svg_node)
     
 	let previous_flow = 1;
+	let mode = 0;
+	var pg_list = document.querySelectorAll('[id^="pg_"]');
 
 	function click(event) {
-		console.log(previous_flow)
+        if (event.currentTarget.id.startsWith("MODE")){
+			if (mode == 0){
+				mode = 1;
+				for (let i = 0; i < pg_list.length; i++) {
+					pg_inv_num_round = pg_list[i].id.slice(3);
+					d3.select("#pg_" + pg_inv_num_round).selectAll("path")
+						.style("stroke-opacity", 1.0);
+					}
+				}
+			else if (mode == 1){
+				mode = 0;
+				for (let i = 0; i < pg_list.length; i++) {
+					pg_inv_num_round = pg_list[i].id.slice(3);
+					d3.select("#pg_" + pg_inv_num_round).selectAll("path")
+						.style("stroke-opacity", 0.0);
+					d3.select("#wreck_pg_" + pg_inv_num_round).selectAll("path")
+						.style("stroke-opacity", 0.0);
+					}
+				}
+			}
         if (event.currentTarget.id.startsWith("BUTTON")){
 			d3.select("#flood_" + previous_flow).selectAll("path")
 				.style("fill", flood_rgb)
@@ -109,7 +133,23 @@ classes: wide
 				.text(H_round.toString() + " ft")
                 .style("opacity",1);
 
-
+			if (mode == 1){
+				for (let i = 0; i < pg_list.length; i++) {
+					pg_inv_num_round = pg_list[i].id.slice(3);
+					if (inv_num_round >= pg_inv_num_round){
+						d3.select("#pg_" + pg_inv_num_round).selectAll("path")
+							.style("stroke-opacity", 0.0);
+						d3.select("#wreck_pg_" + pg_inv_num_round).selectAll("path")
+							.style("stroke-opacity", 1.0);
+						}
+					else {
+						d3.select("#pg_" + pg_inv_num_round).selectAll("path")
+							.style("stroke-opacity", 1.0);
+						d3.select("#wreck_pg_" + pg_inv_num_round).selectAll("path")
+							.style("stroke-opacity", 0.0);
+						}
+					}
+				}
 			previous_flow = inv_num_round.toString();
 		}
     }
