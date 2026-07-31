@@ -91,126 +91,113 @@ function mouse_up(event) {
 	click = 0
 }
 
-//load direction
-$.ajax({
-    url: "https://raw.githubusercontent.com/jeffskwang/jeffskwang.github.io/main/assets/data/flow_dir_8bit.csv",
-    async: false,
-    success: function (csvd) {
-        fdir = $.csv.toArrays(csvd);
-    },
-    dataType: "text",
-    complete: function () {
-        // call a function on complete 
-    }
-});
+// load_data.js — drop-in replacement for the block of 7 $.ajax(...) calls
+// PLUS the render/aerial normalization loop and the rain/areaold/areanew
+// init loop that followed them in rain_3.0.js. Everything from
+// "var x_neighbor = ..." onward in the original file is unchanged.
 
-//load rendered image (red-band)
-$.ajax({
-    url: "https://raw.githubusercontent.com/jeffskwang/jeffskwang.github.io/main/assets/data/render_R_8bit.csv",
-    async: false,
-    success: function (csvd) {
-        render_R = $.csv.toArrays(csvd);
-    },
-    dataType: "text",
-    complete: function () {
-        // call a function on complete 
-    }
-});
-
-//load rendered image (green-band)
-$.ajax({
-    url: "https://raw.githubusercontent.com/jeffskwang/jeffskwang.github.io/main/assets/data/render_G_8bit.csv",
-    async: false,
-    success: function (csvd) {
-        render_G = $.csv.toArrays(csvd);
-    },
-    dataType: "text",
-    complete: function () {
-        // call a function on complete 
-    }
-});
-
-//load rendered image (blue-band)
-$.ajax({
-    url: "https://raw.githubusercontent.com/jeffskwang/jeffskwang.github.io/main/assets/data/render_B_8bit.csv",
-    async: false,
-    success: function (csvd) {
-        render_B = $.csv.toArrays(csvd);
-    },
-    dataType: "text",
-    complete: function () {
-        // call a function on complete 
-    }
-});
-
-//load rendered image (red-band)
-$.ajax({
-    url: "https://raw.githubusercontent.com/jeffskwang/jeffskwang.github.io/main/assets/data/aerial_R_8bit.csv",
-    async: false,
-    success: function (csvd) {
-        aerial_R = $.csv.toArrays(csvd);
-    },
-    dataType: "text",
-    complete: function () {
-        // call a function on complete 
-    }
-});
-
-//load rendered image (green-band)
-$.ajax({
-    url: "https://raw.githubusercontent.com/jeffskwang/jeffskwang.github.io/main/assets/data/aerial_G_8bit.csv",
-    async: false,
-    success: function (csvd) {
-        aerial_G = $.csv.toArrays(csvd);
-    },
-    dataType: "text",
-    complete: function () {
-        // call a function on complete 
-    }
-});
-
-//load rendered image (blue-band)
-$.ajax({
-    url: "https://raw.githubusercontent.com/jeffskwang/jeffskwang.github.io/main/assets/data/aerial_B_8bit.csv",
-    async: false,
-    success: function (csvd) {
-        aerial_B = $.csv.toArrays(csvd);
-    },
-    dataType: "text",
-    complete: function () {
-        // call a function on complete 
-    }
-});
-
-//read in render image
-for(var i=0; i<canvas.width; i++) {
-    for(var j=0; j<canvas.height; j++) {
-		render_R[i][j] = parseFloat(render_R[i][j])/255.;//convert string to numbers
-		render_G[i][j] = parseFloat(render_G[i][j])/255.;//convert string to numbers
-		render_B[i][j] = parseFloat(render_B[i][j])/255.;//convert string to numbers
-		aerial_R[i][j] = parseFloat(aerial_R[i][j])/255.;//convert string to numbers
-		aerial_G[i][j] = parseFloat(aerial_G[i][j])/255.;//convert string to numbers
-		aerial_B[i][j] = parseFloat(aerial_B[i][j])/255.;//convert string to numbers
-    }
-}
-
-//make rain array, area arrays
-//rain array is where the user clicks, area area shows the rivers
-//also fill the data array with dem data
-var rain = [];
-var areaold = [];
-var areanew = [];
-for(var i=0; i<M; i++) {
-    rain[i] = [];
-    areaold[i] = [];
-    areanew[i] = [];
-    for(var j=0; j< N; j++) {
-		rain[i][j]=0.0;
+async function loadTerrainData(url) {
+	const res = await fetch(url);
+	if (!res.ok) {
+	  throw new Error(`Failed to load ${url}: ${res.status} ${res.statusText}`);
+	}
+	const buf = new Uint8Array(await res.arrayBuffer());
+  
+	// --- header ---
+	const magic = String.fromCharCode(buf[0], buf[1], buf[2], buf[3]);
+	if (magic !== 'TRN1') {
+	  throw new Error(`Unexpected file format: magic was "${magic}", expected "TRN1"`);
+	}
+	const version = buf[4];
+	const layerCount = buf[5];
+	if (layerCount !== 7) {
+	  throw new Error(`Expected 7 layers in terrain.bin, found ${layerCount}`);
+	}
+  
+	const view = new DataView(buf.buffer, buf.byteOffset, buf.byteLength);
+	let offset = 6;
+	const layerMeta = [];
+	for (let i = 0; i < layerCount; i++) {
+	  const rows = view.getUint16(offset, true); offset += 2;
+	  const cols = view.getUint16(offset, true); offset += 2;
+	  layerMeta.push({ rows, cols });
+	}
+  
+	// Reshape a flat run of bytes into arr[i][j], i < rows, j < cols — this
+	// matches exactly how $.csv.toArrays() + the original for-loops indexed
+	// fdir/render_R/etc (rows = outer loop bound, cols = inner loop bound),
+	// so draw_data() downstream needs zero changes.
+	function reshape(meta) {
+	  const { rows, cols } = meta;
+	  const arr = new Array(rows);
+	  for (let i = 0; i < rows; i++) {
+		arr[i] = buf.subarray(offset, offset + cols); // zero-copy view, real Uint8 values
+		offset += cols;
+	  }
+	  return arr;
+	}
+  
+	const rawFdir     = reshape(layerMeta[0]);
+	const rawRenderR  = reshape(layerMeta[1]);
+	const rawRenderG  = reshape(layerMeta[2]);
+	const rawRenderB  = reshape(layerMeta[3]);
+	const rawAerialR  = reshape(layerMeta[4]);
+	const rawAerialG  = reshape(layerMeta[5]);
+	const rawAerialB  = reshape(layerMeta[6]);
+  
+	// fdir stays as raw integers (0-8 direction codes) — same as what the
+	// original parseFloat() loop produced.
+	fdir = rawFdir;
+  
+	// render_*/aerial_* were divided by 255 in the original code (used as
+	// 0-1 floats in draw_data's blend math) — reproduce that so this is a
+	// true drop-in and nothing else in the file has to change.
+	const toUnitFloat = rows => rows.map(row => Float32Array.from(row, v => v / 255));
+	render_R = toUnitFloat(rawRenderR);
+	render_G = toUnitFloat(rawRenderG);
+	render_B = toUnitFloat(rawRenderB);
+	aerial_R = toUnitFloat(rawAerialR);
+	aerial_G = toUnitFloat(rawAerialG);
+	aerial_B = toUnitFloat(rawAerialB);
+  
+	// --- sanity checks against the constants the rest of the script assumes.
+	// These are the exact mismatches that silently corrupted data in the
+	// hardcoded-size version, so surface them loudly instead. ---
+	if (fdir.length !== M || fdir[0].length !== N) {
+	  console.warn(`fdir is ${fdir.length}x${fdir[0].length}, but M/N are set to ${M}x${N}. Update M/N to match.`);
+	}
+	if (render_R.length !== canvas.width || render_R[0].length !== canvas.height) {
+	  console.warn(`render_R is ${render_R.length}x${render_R[0].length}, but canvas is ${canvas.width}x${canvas.height}. Pixel indexing in draw_data() will be wrong until these match.`);
+	}
+	if (aerial_R.length !== canvas.width || aerial_R[0].length !== canvas.height) {
+	  console.warn(`aerial_R is ${aerial_R.length}x${aerial_R[0].length}, but canvas is ${canvas.width}x${canvas.height}. Pixel indexing in draw_data() will be wrong until these match.`);
+	}
+  }
+  
+  // --- replaces the old top-level code that ran right after the ajax calls ---
+  async function init() {
+	await loadTerrainData('/assets/data/terrain.bin'); // same-origin, one request instead of 7
+  
+	rain = [];
+	areaold = [];
+	areanew = [];
+	for (var i = 0; i < M; i++) {
+	  rain[i] = [];
+	  areaold[i] = [];
+	  areanew[i] = [];
+	  for (var j = 0; j < N; j++) {
+		rain[i][j] = 0.0;
 		areaold[i][j] = 0.0;
 		areanew[i][j] = 0.0;
-		fdir[i][j] = parseFloat(fdir[i][j]);//convert string to numbers
-    }
-}
+	  }
+	}
+  
+	setInterval(draw_data, dt); // draw_data + dt are defined further down in rain_3.0.js, unchanged
+  }
+  
+  init().catch(err => {
+	console.error('Failed to initialize rain model:', err);
+  });
 
 //parameters decribing where the neighbors are in (x,y) index space, dx_neighbor is distance to the corresponding neighbor
 //qgis dir map
